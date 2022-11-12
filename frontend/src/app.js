@@ -1,6 +1,7 @@
 import logo from './images/logo.png';
 import './styles/App.module.scss';
 import {useState} from "react";
+import Footer from './components/Footer';
 
 function App() {
     const [search, setSearch] = useState("");
@@ -79,6 +80,7 @@ function App() {
                 )}
             </div>
         </section>
+        <Footer />
       </>
   );
 }

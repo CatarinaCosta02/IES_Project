@@ -1,6 +1,9 @@
 import {useState} from "react";
 import logo from "./images/logo.png";
 import Navbar from "./components/Navbar"
+import Footer from "./components/Footer";
+
+
 
 function UserDashboard() {
     const [search, setSearch] = useState("");
@@ -239,7 +242,9 @@ function UserDashboard() {
                     </div>
                 </div>
             </section>
+            <Footer />
         </>
+        
     );
 }
 
