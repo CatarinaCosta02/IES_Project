@@ -41,6 +41,7 @@ function UserDashboard() {
                                         <p className="card-subtitle">Card Subtitle</p>
                                         <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing
                                             elit. Quisquam, quae.</p>
+                                        <a href="/dashboard/news">Join discussion</a>
                                     </div>
                                 </div>
                                 <div className="card">
@@ -49,6 +50,7 @@ function UserDashboard() {
                                         <p className="card-subtitle">Card Subtitle</p>
                                         <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing
                                             elit. Quisquam, quae.</p>
+                                        <a href="/dashboard/news">Join discussion</a>
                                     </div>
                                 </div>
                             </div>
@@ -65,6 +67,7 @@ function UserDashboard() {
                                         <p className="card-subtitle">Card Subtitle</p>
                                         <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing
                                             elit. Quisquam, quae.</p>
+                                        <a href="/dashboard/news">Join discussion</a>
                                     </div>
                                 </div>
                                 <div className="card">
@@ -73,6 +76,8 @@ function UserDashboard() {
                                         <p className="card-subtitle">Card Subtitle</p>
                                         <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing
                                             elit. Quisquam, quae.</p>
+
+                                        <a href="/dashboard/news">Join discussion</a>
                                     </div>
                                 </div>
                             </div>
@@ -90,6 +95,7 @@ function UserDashboard() {
                             <p className="card-subtitle">Card Subtitle</p>
                             <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing
                                 elit. Quisquam, quae.</p>
+                            <a href="/dashboard/news">Join discussion</a>
                         </div>
                     </div>
                     <div className="card">
@@ -98,6 +104,7 @@ function UserDashboard() {
                             <p className="card-subtitle">Card Subtitle</p>
                             <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing
                                 elit. Quisquam, quae.</p>
+                            <a href="/dashboard/news">Join discussion</a>
                         </div>
                     </div>
                     <div className="card">
@@ -106,6 +113,7 @@ function UserDashboard() {
                             <p className="card-subtitle">Card Subtitle</p>
                             <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing
                                 elit. Quisquam, quae.</p>
+                            <a href="/dashboard/news">Join discussion</a>
                         </div>
                     </div>
                     <div className="card">
@@ -114,6 +122,7 @@ function UserDashboard() {
                             <p className="card-subtitle">Card Subtitle</p>
                             <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing
                                 elit. Quisquam, quae.</p>
+                            <a href="/dashboard/news">Join discussion</a>
                         </div>
                     </div>
                     <div className="card">
@@ -122,6 +131,7 @@ function UserDashboard() {
                             <p className="card-subtitle">Card Subtitle</p>
                             <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing
                                 elit. Quisquam, quae.</p>
+                            <a href="/dashboard/news">Join discussion</a>
                         </div>
                     </div>
                     <div className="card">
@@ -130,6 +140,7 @@ function UserDashboard() {
                             <p className="card-subtitle">Card Subtitle</p>
                             <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing
                                 elit. Quisquam, quae.</p>
+                            <a href="/dashboard/news">Join discussion</a>
                         </div>
                     </div>
                 </div>
@@ -144,6 +155,7 @@ function UserDashboard() {
                             <p className="card-subtitle">Card Subtitle</p>
                             <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing
                                 elit. Quisquam, quae.</p>
+                            <a href="/dashboard/news">Join discussion</a>
                         </div>
                     </div>
                     <div className="card">
@@ -152,6 +164,7 @@ function UserDashboard() {
                             <p className="card-subtitle">Card Subtitle</p>
                             <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing
                                 elit. Quisquam, quae.</p>
+                            <a href="/dashboard/news">Join discussion</a>
                         </div>
                     </div>
                     <div className="card">
@@ -160,6 +173,7 @@ function UserDashboard() {
                             <p className="card-subtitle">Card Subtitle</p>
                             <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing
                                 elit. Quisquam, quae.</p>
+                            <a href="/dashboard/news">Join discussion</a>
                         </div>
                     </div>
                     <div className="card">
@@ -168,6 +182,7 @@ function UserDashboard() {
                             <p className="card-subtitle">Card Subtitle</p>
                             <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing
                                 elit. Quisquam, quae.</p>
+                            <a href="/dashboard/news">Join discussion</a>
                         </div>
                     </div>
                     <div className="card">
@@ -176,6 +191,7 @@ function UserDashboard() {
                             <p className="card-subtitle">Card Subtitle</p>
                             <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing
                                 elit. Quisquam, quae.</p>
+                            <a href="/dashboard/news">Join discussion</a>
                         </div>
                     </div>
                     <div className="card">
@@ -184,6 +200,7 @@ function UserDashboard() {
                             <p className="card-subtitle">Card Subtitle</p>
                             <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing
                                 elit. Quisquam, quae.</p>
+                            <a href="/dashboard/news">Join discussion</a>
                         </div>
                     </div>
                 </div>
@@ -198,6 +215,7 @@ function UserDashboard() {
                             <p className="card-subtitle">Card Subtitle</p>
                             <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing
                                 elit. Quisquam, quae.</p>
+                            <a href="/dashboard/news">Join discussion</a>
                         </div>
                     </div>
                     <div className="card">
@@ -206,6 +224,7 @@ function UserDashboard() {
                             <p className="card-subtitle">Card Subtitle</p>
                             <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing
                                 elit. Quisquam, quae.</p>
+                            <a href="/dashboard/news">Join discussion</a>
                         </div>
                     </div>
                     <div className="card">
@@ -214,6 +233,7 @@ function UserDashboard() {
                             <p className="card-subtitle">Card Subtitle</p>
                             <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing
                                 elit. Quisquam, quae.</p>
+                            <a href="/dashboard/news">Join discussion</a>
                         </div>
                     </div>
                     <div className="card">
@@ -222,6 +242,7 @@ function UserDashboard() {
                             <p className="card-subtitle">Card Subtitle</p>
                             <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing
                                 elit. Quisquam, quae.</p>
+                            <a href="/dashboard/news">Join discussion</a>
                         </div>
                     </div>
                     <div className="card">
@@ -230,6 +251,7 @@ function UserDashboard() {
                             <p className="card-subtitle">Card Subtitle</p>
                             <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing
                                 elit. Quisquam, quae.</p>
+                            <a href="/dashboard/news">Join discussion</a>
                         </div>
                     </div>
                     <div className="card">
@@ -238,6 +260,7 @@ function UserDashboard() {
                             <p className="card-subtitle">Card Subtitle</p>
                             <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing
                                 elit. Quisquam, quae.</p>
+                            <a href="/dashboard/news">Join discussion</a>
                         </div>
                     </div>
                 </div>

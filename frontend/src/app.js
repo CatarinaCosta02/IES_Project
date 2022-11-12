@@ -34,6 +34,15 @@ function App() {
                            onInput={e => setSearch(e.target.value)}
                     />
                 </div>
+                <div className="dropdown">
+                    <label tabIndex={0} className="btn m-1">Choose topic</label>
+                    <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                      <li><a>Beauty</a></li>
+                      <li><a>Sports</a></li>
+                      <li><a>Games</a></li>
+                      <li><a>Politics</a></li>
+                    </ul>
+                </div>
 
                 { search.length > 0 && (
                     <>
