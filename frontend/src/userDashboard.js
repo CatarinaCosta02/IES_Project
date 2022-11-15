@@ -1,7 +1,8 @@
 import {useState} from "react";
 import logo from "./images/logo.png";
 import Navbar from "./components/Navbar"
-import Footer from "./components/Footer";
+import Footer from "./components/Footer"
+import Card from "./components/Card";
 
 
 
@@ -60,26 +61,9 @@ function UserDashboard() {
                     {search.length === 0 && (
                         <>
                             <h2 className="text-2xl py-4">Most recent news</h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                <div className="card">
-                                    <div className="card-body">
-                                        <h2 className="card-title">Card Title</h2>
-                                        <p className="card-subtitle">Card Subtitle</p>
-                                        <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing
-                                            elit. Quisquam, quae.</p>
-                                        <a href="/dashboard/news">Join discussion</a>
-                                    </div>
-                                </div>
-                                <div className="card">
-                                    <div className="card-body">
-                                        <h2 className="card-title">Card Title</h2>
-                                        <p className="card-subtitle">Card Subtitle</p>
-                                        <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing
-                                            elit. Quisquam, quae.</p>
-
-                                        <a href="/dashboard/news">Join discussion</a>
-                                    </div>
-                                </div>
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 place-items-center">
+                                <Card />
+                                <Card />
                             </div>
                         </>
                     )}
@@ -88,61 +72,16 @@ function UserDashboard() {
 
             <section id="reddit">
                 <h2 className="text-2xl py-4">Reddit news</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <div className="card">
-                        <div className="card-body">
-                            <h2 className="card-title">Card Title</h2>
-                            <p className="card-subtitle">Card Subtitle</p>
-                            <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing
-                                elit. Quisquam, quae.</p>
-                            <a href="/dashboard/news">Join discussion</a>
-                        </div>
-                    </div>
-                    <div className="card">
-                        <div className="card-body">
-                            <h2 className="card-title">Card Title</h2>
-                            <p className="card-subtitle">Card Subtitle</p>
-                            <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing
-                                elit. Quisquam, quae.</p>
-                            <a href="/dashboard/news">Join discussion</a>
-                        </div>
-                    </div>
-                    <div className="card">
-                        <div className="card-body">
-                            <h2 className="card-title">Card Title</h2>
-                            <p className="card-subtitle">Card Subtitle</p>
-                            <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing
-                                elit. Quisquam, quae.</p>
-                            <a href="/dashboard/news">Join discussion</a>
-                        </div>
-                    </div>
-                    <div className="card">
-                        <div className="card-body">
-                            <h2 className="card-title">Card Title</h2>
-                            <p className="card-subtitle">Card Subtitle</p>
-                            <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing
-                                elit. Quisquam, quae.</p>
-                            <a href="/dashboard/news">Join discussion</a>
-                        </div>
-                    </div>
-                    <div className="card">
-                        <div className="card-body">
-                            <h2 className="card-title">Card Title</h2>
-                            <p className="card-subtitle">Card Subtitle</p>
-                            <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing
-                                elit. Quisquam, quae.</p>
-                            <a href="/dashboard/news">Join discussion</a>
-                        </div>
-                    </div>
-                    <div className="card">
-                        <div className="card-body">
-                            <h2 className="card-title">Card Title</h2>
-                            <p className="card-subtitle">Card Subtitle</p>
-                            <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing
-                                elit. Quisquam, quae.</p>
-                            <a href="/dashboard/news">Join discussion</a>
-                        </div>
-                    </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 place-items-center">
+                    <Card />
+                    <Card />
+                    <Card />
+                    <Card />
+                    <Card />
+                    <Card />
+                    <Card />
+                    <Card />
+                    <Card />
                 </div>
             </section>
 
