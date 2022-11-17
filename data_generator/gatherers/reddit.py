@@ -12,7 +12,7 @@ class RedditGatherer:
 
         self.auth = self._authenticate()
 
-    def gather(self, subreddit, query):
+    def search(self, subreddit, query):
         if self.auth[1] + 1.5 * 60 * 60 < time.time():
             self.auth = self._authenticate()
 
@@ -24,7 +24,9 @@ class RedditGatherer:
             "limit": 10
         }
         headers = {'User-Agent': f'WhatsNew/0.1 by {self.username}', 'Authorization': f'bearer {self.auth[0]}'}
-        return requests.get(f"https://oauth.reddit.com/r/{subreddit}/search", headers=headers, params=data).content
+        if subreddit is not None:
+            return requests.get(f"https://oauth.reddit.com/r/{subreddit}/search", headers=headers, params=data).json()
+        return requests.get(f"https://oauth.reddit.com/search", headers=headers, params=data).json()
 
     def _authenticate(self):
         auth = requests.auth.HTTPBasicAuth(self.app_id, self.app_secret)
