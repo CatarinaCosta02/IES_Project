@@ -1,4 +1,4 @@
-from communications.Protocol import Protocol
+from communications.protocol import Protocol
 from gatherers.hn import HackerNewsGatherer
 from gatherers.reddit import RedditGatherer
 
