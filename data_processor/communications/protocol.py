@@ -32,7 +32,8 @@ class Protocol(CommunicationLayer):
 
     def send_response(self, type_, success, payload=None):
         data = {
-            "success": success
+            "success": success,
+            "kind": type_
         }
 
         if payload is not None:

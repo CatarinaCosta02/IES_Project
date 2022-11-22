@@ -10,7 +10,6 @@ if __name__ == "__main__":
     hn_parser = HNProtocol("localhost")
 
     proto.register_response_callback(lambda data: reddit_parser.process(data), "reddit")
-    proto.register_response_callback(lambda data:
-                                     pprint(data, stream=open("hn.json", "w")), "hn")
+    proto.register_response_callback(lambda data: hn_parser.process(data), "hn")
 
     proto.loop()

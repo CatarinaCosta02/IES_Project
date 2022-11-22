@@ -23,7 +23,6 @@ class HNProtocol:
                 "author": item["by"],
                 "score": item["score"],
                 "permalink": item["url"],
-                "num_comments": item["descendants"],
                 "created": item["time"]
             })
 
