@@ -9,18 +9,11 @@ class CommunicationLayer:
 
         self.channel.exchange_declare(exchange='data_gen')
 
-        self.channel.queue_declare(queue='requests', durable=True)
-        self.channel.queue_bind(exchange='data_gen', queue='requests')
-
         self.channel.queue_declare(queue='responses.reddit', durable=True)
         self.channel.queue_bind(exchange='data_gen', queue='responses.reddit')
 
         self.channel.queue_declare(queue='responses.hn', durable=True)
         self.channel.queue_bind(exchange='data_gen', queue='responses.hn')
-
-    def bind_request_callback(self, callback):
-        self.channel.basic_consume(
-            queue='requests', on_message_callback=callback, auto_ack=True)
 
     def bind_reddit_response_callback(self, callback):
         self.channel.basic_consume(

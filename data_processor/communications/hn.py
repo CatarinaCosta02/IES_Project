@@ -27,7 +27,7 @@ class HNProtocol:
             })
 
         bytes_data = json.dumps({
-            "kind": data["kind"],
+            "kind": data["method"],
             "payload": treated_data,
             "success": True
         }).encode("utf-8")

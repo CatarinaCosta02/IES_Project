@@ -20,10 +20,10 @@ class Protocol(CommunicationLayer):
         elif key == "hn":
             self.bind_hn_response_callback(callback)
 
-    def send_response(self, type_, success, payload=None):
+    def send_response(self, type_, method, success, payload=None):
         data = {
             "success": success,
-            "kind": type_
+            "method": method
         }
 
         if payload is not None:
