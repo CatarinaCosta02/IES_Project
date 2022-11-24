@@ -6,6 +6,6 @@ public class Consumer {
 
     @RabbitListener(queues = {Config.QUEUE_HN, Config.QUEUE_REDDIT})
     public void consume(String message){
-        System.out.print(message);
+        System.out.println(message);
     }
 }
