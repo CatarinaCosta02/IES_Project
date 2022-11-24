@@ -28,7 +28,7 @@ public class Config {
     // spring bean for rabbitmq exchange
     @Bean
     public DirectExchange exchange() {
-        return new DirectExchange(EXCHANGE);
+        return new DirectExchange(EXCHANGE, false, false);
     }
 
     // binding between queue and exchange using routing key
