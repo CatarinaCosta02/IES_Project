@@ -1,4 +1,4 @@
-from communications.Protocol import Protocol
+from communications.protocol import Protocol
 from gatherers.hn import HackerNewsGatherer
 from gatherers.reddit import RedditGatherer
 
@@ -25,10 +25,10 @@ class App:
             proto.send_response("reddit", False)
             return
 
-        proto.send_response("reddit", True, self.r_gatherer.search(subreddit, query))
+        proto.send_response("reddit", "search", True, self.r_gatherer.search(subreddit, query))
 
     def top_hn(self, proto, msg):
-        proto.send_response("hn", True, self.hn_gatherer.top_stories())
+        proto.send_response("hn", "top_stories", True, self.hn_gatherer.top_stories())
 
     def run(self):
         self.proto.loop()

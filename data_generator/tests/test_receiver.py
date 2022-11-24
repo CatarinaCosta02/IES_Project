@@ -1,4 +1,4 @@
-from communications.Protocol import Protocol
+from communications.protocol import Protocol
 
 if __name__ == "__main__":
     proto = Protocol("localhost")
