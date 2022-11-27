@@ -17,7 +17,7 @@ public class Routes {
 
     @GetMapping("/hello")
     public String HelloRabbit() {
-        rabbit.send("api", "api", new Message("Hello".getBytes()));
-        return "";
+        rabbit.convertAndSend("api", "api", "Hello");
+        return "Hello";
     }
 }

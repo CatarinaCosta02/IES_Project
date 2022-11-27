@@ -20,4 +20,10 @@ public class Config {
     public Queue queueApi() {
         return new Queue(QUEUE_API, true);
     }
+
+    // spring bean for binding queue to exchange
+    @Bean
+    public Binding bindingApi() {
+        return BindingBuilder.bind(queueApi()).to(exchange()).with(QUEUE_API);
+    }
 }
