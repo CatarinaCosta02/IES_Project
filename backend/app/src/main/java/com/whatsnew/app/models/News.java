@@ -17,7 +17,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 public class News {
 
     @Id
-    private String id;
+    private String _id;
 
     @Field(type = FieldType.Text, name = "title")
     private String title;
