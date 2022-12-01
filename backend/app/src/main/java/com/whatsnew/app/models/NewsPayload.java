@@ -17,6 +17,7 @@ public class NewsPayload {
     private String author;
     private int score;
     private String permalink;
-    private Integer comments = null;
+    private Integer num_comments = null;
     private int created;
+    private String source = null;
 }
