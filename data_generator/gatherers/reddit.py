@@ -28,6 +28,17 @@ class RedditGatherer:
             return requests.get(f"https://oauth.reddit.com/r/{subreddit}/search", headers=headers, params=data).json()
         return requests.get(f"https://oauth.reddit.com/search", headers=headers, params=data).json()
 
+    def top_stories(self):
+        if self.auth[1] + 1.5 * 60 * 60 < time.time():
+            self.auth = self._authenticate()
+
+        data = {
+            "t": "all",
+            "limit": 10
+        }
+        headers = {'User-Agent': f'WhatsNew/0.1 by {self.username}', 'Authorization': f'bearer {self.auth[0]}'}
+        return requests.get(f"https://oauth.reddit.com/top", headers=headers, params=data).json()
+
     def _authenticate(self):
         auth = requests.auth.HTTPBasicAuth(self.app_id, self.app_secret)
 

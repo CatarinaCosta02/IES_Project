@@ -15,6 +15,7 @@ class App:
         self.hn_gatherer = HackerNewsGatherer()
 
         self.proto.register_request_callback(self.search_reddit, "reddit.search")
+        self.proto.register_request_callback(self.top_reddit, "reddit.top_stories")
         self.proto.register_request_callback(self.top_hn, "hn.top_stories")
 
     def search_reddit(self, proto, msg):
@@ -29,6 +30,9 @@ class App:
 
     def top_hn(self, proto, msg):
         proto.send_response("hn", "top_stories", True, self.hn_gatherer.top_stories())
+
+    def top_reddit(self, proto, msg):
+        proto.send_response("reddit", "top_stories", True, self.r_gatherer.top_stories())
 
     def run(self):
         self.proto.loop()
