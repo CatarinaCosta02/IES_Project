@@ -1,4 +1,3 @@
-import datetime
 import time
 
 import redis as redis
@@ -15,6 +14,8 @@ class RedditGatherer:
         self.auth = self._authenticate()
         self.redis = redis.Redis(host='localhost', port=6379)
 
+        self.THRESHOLD = 5  # in news
+
     def in_cache(self, item):
         if not self.redis.sismember("reddit", item["id"]):
             self.redis.sadd("reddit", item["id"])
@@ -25,34 +26,62 @@ class RedditGatherer:
         if self.auth[1] + 1.5 * 60 * 60 < time.time():
             self.auth = self._authenticate()
 
-        data = {
+        payload = {
             "q": query,
             "restrict_sr": "on",
             "sort": "relevance",
             "t": "all",
-            "limit": 50
+            "limit": 4 * self.THRESHOLD
         }
         headers = {'User-Agent': f'WhatsNew/0.1 by {self.username}', 'Authorization': f'bearer {self.auth[0]}'}
         if subreddit is not None:
-            d = requests.get(f"https://oauth.reddit.com/r/{subreddit}/search", headers=headers, params=data).json()
-            d["data"]["children"].filter(lambda i: i is not None and not self.in_cache(i))
+            data = requests.get(f"https://oauth.reddit.com/r/{subreddit}/search", headers=headers, params=payload).json()
+            data["data"]["children"].filter(lambda i: i is not None and not self.in_cache(i))
 
-        d = requests.get(f"https://oauth.reddit.com/search", headers=headers, params=data).json()
-        d["data"]["children"] = list(filter(lambda i: i is not None and not self.in_cache(i["data"]), d["data"]["children"]))
-        return d
+            it = 0
+            while len(data["data"]["children"]) < self.THRESHOLD and it < 5:
+                payload["after"] = data["data"]["after"]
+                new_data = requests.get(f"https://oauth.reddit.com/r/{subreddit}/search", headers=headers, params=payload).json()
+                data["data"]["children"] += list(filter(lambda i: i is not None and not self.in_cache(i), new_data["data"]["children"]))
+                data["data"]["after"] = new_data["data"]["after"]
+                it += 1
+
+            return data
+
+        data = requests.get(f"https://oauth.reddit.com/search", headers=headers, params=payload).json()
+        data["data"]["children"] = list(filter(lambda i: i is not None and not self.in_cache(i["data"]), data["data"]["children"]))
+
+        it = 0
+        while len(data["data"]["children"]) < self.THRESHOLD and it < 5:
+            payload["after"] = data["data"]["after"]
+            new_data = requests.get(f"https://oauth.reddit.com/search", headers=headers, params=payload).json()
+            data["data"]["children"] += list(filter(lambda i: i is not None and not self.in_cache(i), new_data["data"]["children"]))
+            data["data"]["after"] = new_data["data"]["after"]
+            it += 1
+
+        return data
 
     def top_stories(self):
         if self.auth[1] + 1.5 * 60 * 60 < time.time():
             self.auth = self._authenticate()
 
-        data = {
+        payload = {
             "t": "all",
-            "limit": 50
+            "limit": 4 * self.THRESHOLD
         }
         headers = {'User-Agent': f'WhatsNew/0.1 by {self.username}', 'Authorization': f'bearer {self.auth[0]}'}
-        d = requests.get(f"https://oauth.reddit.com/top", headers=headers, params=data).json()
-        d["data"]["children"] = list(filter(lambda i: i is not None and not self.in_cache(i["data"]), d["data"]["children"]))
-        return d
+        data = requests.get(f"https://oauth.reddit.com/top", headers=headers, params=payload).json()
+        data["data"]["children"] = list(filter(lambda i: i is not None and not self.in_cache(i["data"]), data["data"]["children"]))
+
+        it = 0
+        while len(data["data"]["children"]) < self.THRESHOLD and it < 5:
+            payload["after"] = data["data"]["after"]
+            new_data = requests.get(f"https://oauth.reddit.com/top", headers=headers, params=payload).json()
+            data["data"]["children"] += list(filter(lambda i: i is not None and not self.in_cache(i["data"]), new_data["data"]["children"]))
+            data["data"]["after"] = new_data["data"]["after"]
+            it += 1
+
+        return data
 
     def _authenticate(self):
         auth = requests.auth.HTTPBasicAuth(self.app_id, self.app_secret)
