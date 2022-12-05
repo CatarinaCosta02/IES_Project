@@ -1,5 +1,7 @@
+import datetime
 import time
 
+import redis as redis
 import requests
 
 
@@ -11,6 +13,13 @@ class RedditGatherer:
         self.app_secret = config.get("app_secret")
 
         self.auth = self._authenticate()
+        self.redis = redis.Redis(host='localhost', port=6379)
+
+    def in_cache(self, item):
+        if not self.redis.sismember("reddit", item["id"]):
+            self.redis.sadd("reddit", item["id"])
+            return False
+        return True
 
     def search(self, subreddit, query):
         if self.auth[1] + 1.5 * 60 * 60 < time.time():
@@ -21,12 +30,16 @@ class RedditGatherer:
             "restrict_sr": "on",
             "sort": "relevance",
             "t": "all",
-            "limit": 10
+            "limit": 50
         }
         headers = {'User-Agent': f'WhatsNew/0.1 by {self.username}', 'Authorization': f'bearer {self.auth[0]}'}
         if subreddit is not None:
-            return requests.get(f"https://oauth.reddit.com/r/{subreddit}/search", headers=headers, params=data).json()
-        return requests.get(f"https://oauth.reddit.com/search", headers=headers, params=data).json()
+            d = requests.get(f"https://oauth.reddit.com/r/{subreddit}/search", headers=headers, params=data).json()
+            d["data"]["children"].filter(lambda i: i is not None and not self.in_cache(i))
+
+        d = requests.get(f"https://oauth.reddit.com/search", headers=headers, params=data).json()
+        d["data"]["children"] = list(filter(lambda i: i is not None and not self.in_cache(i["data"]), d["data"]["children"]))
+        return d
 
     def top_stories(self):
         if self.auth[1] + 1.5 * 60 * 60 < time.time():
@@ -34,10 +47,12 @@ class RedditGatherer:
 
         data = {
             "t": "all",
-            "limit": 10
+            "limit": 50
         }
         headers = {'User-Agent': f'WhatsNew/0.1 by {self.username}', 'Authorization': f'bearer {self.auth[0]}'}
-        return requests.get(f"https://oauth.reddit.com/top", headers=headers, params=data).json()
+        d = requests.get(f"https://oauth.reddit.com/top", headers=headers, params=data).json()
+        d["data"]["children"] = list(filter(lambda i: i is not None and not self.in_cache(i["data"]), d["data"]["children"]))
+        return d
 
     def _authenticate(self):
         auth = requests.auth.HTTPBasicAuth(self.app_id, self.app_secret)
