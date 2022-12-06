@@ -6,8 +6,8 @@ from communications.reddit import RedditProtocol
 
 if __name__ == "__main__":
     proto = Protocol("localhost")
-    reddit_parser = RedditProtocol("localhost")
-    hn_parser = HNProtocol("localhost")
+    reddit_parser = RedditProtocol(proto)
+    hn_parser = HNProtocol(proto)
 
     proto.register_response_callback(lambda data: reddit_parser.process(data), "reddit")
     proto.register_response_callback(lambda data: hn_parser.process(data), "hn")
