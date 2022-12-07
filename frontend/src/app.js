@@ -1,4 +1,4 @@
-import logo from './images/logo.png';
+import logo from './images/logo_b.png';
 import './styles/App.module.scss';
 import {useState} from "react";
 import Footer from './components/Footer';

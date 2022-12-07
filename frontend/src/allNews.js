@@ -6,7 +6,7 @@ import Card from "./components/Card";
 
 
 
-function UserDashboard() {
+function allNews() {
     const [search, setSearch] = useState("");
 
     return (
@@ -89,4 +89,4 @@ function UserDashboard() {
     );
 }
 
-export default UserDashboard;
+export default allNews;
