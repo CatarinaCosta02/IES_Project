@@ -3,9 +3,8 @@ import pika
 
 
 class HNProtocol:
-    def __init__(self, host):
-        self.host = host
-        self.connection = pika.BlockingConnection(pika.ConnectionParameters(host))
+    def __init__(self, receive_protocol):
+        self.connection = receive_protocol.connection
         self.channel = self.connection.channel()
 
         self.channel.exchange_declare(exchange='finished_data')
@@ -18,13 +17,14 @@ class HNProtocol:
         treated_data = []
 
         for item in useful_data:
-            treated_data.append({
-                "title": item["title"],
-                "author": item["by"],
-                "score": item["score"],
-                "permalink": item["url"],
-                "created": item["time"]
-            })
+            if all(key in item for key in ("title", "by", "url", "score", "time")):
+                treated_data.append({
+                    "title": item["title"],
+                    "author": item["by"],
+                    "score": item["score"],
+                    "permalink": item["url"],
+                    "created": item["time"]
+                })
 
         bytes_data = json.dumps({
             "kind": data["method"],

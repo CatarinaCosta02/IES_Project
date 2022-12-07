@@ -3,9 +3,8 @@ import pika
 
 
 class RedditProtocol:
-    def __init__(self, host):
-        self.host = host
-        self.connection = pika.BlockingConnection(pika.ConnectionParameters(host))
+    def __init__(self, receive_protocol):
+        self.connection = receive_protocol.connection
         self.channel = self.connection.channel()
 
         self.channel.exchange_declare(exchange='finished_data')
