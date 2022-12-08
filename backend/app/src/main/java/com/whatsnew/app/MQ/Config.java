@@ -12,8 +12,7 @@ public class Config {
 
     public final static String QUEUE_REQUEST = "requests";
 
-    public static final String QUEUE_API = "requests_api";
-    public static final String QUEUE_API_RESPONSE = "api_response";
+    public static final String QUEUE_API = "api";
     public final static String EXCHANGE = "finished_data";
     public final static String EXCHANGE_REQUEST = "data_gen";
 
@@ -23,8 +22,7 @@ public class Config {
 
     public final static String ROUTING_KEY_REQUEST = "requests";
 
-    public final static String ROUTING_KEY_API = "requests_api";
-    public final static String ROUTING_KEY_API_RESPONSE = "api_response";
+    public final static String ROUTING_KEY_API = "api";
 
 
 
@@ -47,11 +45,6 @@ public class Config {
     @Bean
     public Queue queueAPI() {
         return new Queue(QUEUE_API, true);
-    }
-
-    @Bean
-    public Queue queueAPIResponse() {
-        return new Queue(QUEUE_API_RESPONSE, true);
     }
 
     // spring bean for rabbitmq exchange
@@ -89,11 +82,6 @@ public class Config {
     @Bean
     public Binding bindingAPI() {
         return BindingBuilder.bind(queueAPI()).to(exchangeAPI()).with(ROUTING_KEY_API);
-    }
-
-    @Bean
-    public Binding bindingAPIResponse() {
-        return BindingBuilder.bind(queueAPIResponse()).to(exchangeAPI()).with(ROUTING_KEY_API_RESPONSE);
     }
 
     @Bean

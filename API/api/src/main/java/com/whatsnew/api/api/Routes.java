@@ -24,7 +24,8 @@ public class Routes {
         }
 
         SearchQuery sq = new SearchQuery(query);
-        return (String) rabbit.convertSendAndReceive(Config.EXCHANGE, Config.QUEUE_API, mapper.writeValueAsString(sq));
+        ApiRequest ar = new ApiRequest("SEARCH", sq);
+        return (String) rabbit.convertSendAndReceive(Config.EXCHANGE, Config.QUEUE_API, mapper.writeValueAsString(ar));
     }
 
 }

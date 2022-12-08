@@ -1,6 +1,5 @@
 package com.whatsnew.app.MQ;
 
-import co.elastic.clients.elasticsearch._types.query_dsl.Operator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.whatsnew.app.models.ApiRequest;
@@ -11,14 +10,10 @@ import com.whatsnew.app.repositories.EKNewsRepository;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.elasticsearch.client.elc.QueryBuilders;
-import org.springframework.data.elasticsearch.client.erhlc.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
-import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
 import org.springframework.data.elasticsearch.core.query.IndexQuery;
 import org.springframework.data.elasticsearch.core.query.IndexQueryBuilder;
-import org.springframework.data.elasticsearch.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -68,16 +63,18 @@ public class Consumer {
 
 
     @RabbitListener(queues = Config.QUEUE_API)
-    public void consumeAPI(String message) throws JsonProcessingException {
+    public String consumeAPI(String message) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         ApiRequest apiRequest = mapper.readValue(message, ApiRequest.class);
         switch (apiRequest.getAction()) {
             case "SEARCH": {
                 List<EKNews> results = ekNewsRepository.searchByTitle(apiRequest.getPayload().getQuery());
-                rabbitMQ.convertAndSend("api", "api_response", mapper.writeValueAsString(results));
-                break;
+                return mapper.writeValueAsString(results);
             }
         }
+
+        // return a message error
+        return "{\"error\": \"Invalid action\"}";
     }
 
 }
