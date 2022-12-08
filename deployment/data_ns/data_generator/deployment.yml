@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: data-generator # Name of the deployment
+  namespace: data # Name of the namespace
+  labels:
+    app: data-generator # Name of your application
+spec:
+  selector:
+    matchLabels:
+      app: data-generator # Name of your application
+  replicas: 1 # Number of replicas
+  template:
+    metadata:
+      labels:
+        app: data-generator # Name of your application
+    spec:
+      containers:
+      - name: data-generator
+        build: "../../data_generator"

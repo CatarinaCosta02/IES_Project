@@ -1,3 +1,5 @@
+import os
+
 from communications.protocol import Protocol
 from gatherers.hn import HackerNewsGatherer
 from gatherers.reddit import RedditGatherer
@@ -5,7 +7,7 @@ from gatherers.reddit import RedditGatherer
 
 class App:
     def __init__(self):
-        self.proto = Protocol("localhost")
+        self.proto = Protocol(os.environ.get("RABBITMQ_HOST", "localhost"))
         self.r_gatherer = RedditGatherer({
             "username": "whatsnewies",
             "password": "m04KT5*noW9cLXQN23ob",
