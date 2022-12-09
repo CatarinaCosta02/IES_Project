@@ -52,6 +52,7 @@ services:
       - REDIS_HOST=redis
     depends_on:
       - rabbitmq
+      - redis
 
   data_proc:
     build: ../data_processor
@@ -65,5 +66,13 @@ services:
     environment:
       - RABBITMQ_HOST=rabbitmq
       - ELASTICSEARCH_HOST=http://es01:9200
+    depends_on:
+      - rabbitmq
+      - es01
+
+  api:
+    build: ../API/api
+    environment:
+      - RABBITMQ_HOST=rabbitmq
     depends_on:
       - rabbitmq
