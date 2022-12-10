@@ -42,8 +42,8 @@ function Register() {
                     <a href="#" className="text-sm hover:text-gray-200">Forgot password?</a>
                   </div>
                 </div>
-                <div className="my-10">
-                  <button className="w-full rounded-full bg-gradient-to-r from-cyan-600 to-blue-700 hover:from-pink-500 hover:to-yellow-500 ...">Login</button>
+                <div className="form-control my-10">
+                  <a href='./dashboard'  className=" inline-flex justify-center items-center rounded-full bg-gradient-to-r from-cyan-600 to-blue-700 hover:from-pink-500 hover:to-yellow-500 ...">Login </a>
                 </div>
               </form>
             </div>
