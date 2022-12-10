@@ -1,0 +1,99 @@
+# create a new build job that builds the image and pushes it to the registry using argo workflows
+# https://argoproj.github.io/argo-workflows/quick-start/
+# https://argoproj.github.io/argo-workflows/workflow-templates/
+# https://argoproj.github.io/argo-workflows/workflow-templates/#workflow-template-parameters
+# https://argoproj.github.io/argo-workflows/workflow-templates/#workflow-template-arguments
+# https://argoproj.github.io/argo-workflows/workflow-templates/#workflow-template-arguments
+
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: build
+spec:
+  entrypoint: build
+  arguments:
+    parameters:
+      - name: image
+        value: "data-generator"
+      - name: context
+        value: "../../../data_generator"
+      - name: dockerfile
+        value: "Dockerfile"
+      - name: registry
+        value: "registry"
+      - name: registry-namespace
+        value: "services"
+      - name: registry-port
+        value: "5000"
+      - name: registry-protocol
+        value: "http"
+  templates:
+    - name: build
+      steps:
+        - - name: build
+            template: build-image
+            arguments:
+              parameters:
+                - name: image
+                  value: "{{workflow.parameters.image}}"
+                - name: context
+                  value: "{{workflow.parameters.context}}"
+                - name: dockerfile
+                  value: "{{workflow.parameters.dockerfile}}"
+        - - name: push
+            template: push-image
+            arguments:
+              parameters:
+                - name: image
+                  value: "{{workflow.parameters.image}}"
+                - name: registry
+                  value: "{{workflow.parameters.registry}}"
+                - name: registry-namespace
+                  value: "{{workflow.parameters.registry-namespace}}"
+                - name: registry-port
+                  value: "{{workflow.parameters.registry-port}}"
+                - name: registry-protocol
+                  value: "{{workflow.parameters.registry-protocol}}"
+    - name: build-image
+      inputs:
+        parameters:
+          - name: image
+          - name: context
+          - name: dockerfile
+      container:
+        image: docker:19.03.12
+        command: [docker]
+        args: ["build", "-t", "{{inputs.parameters.image}}", "-f", "{{inputs.parameters.dockerfile}}", "{{inputs.parameters.context}}"]
+    - name: push-image
+      inputs:
+        parameters:
+          - name: image
+          - name: registry
+          - name: registry-namespace
+          - name: registry-port
+          - name: registry-protocol
+      container:
+        image: docker:19.03.12
+        command: [docker]
+        args: ["tag", "{{inputs.parameters.image}}", "{{inputs.parameters.registry-protocol}}://{{inputs.parameters.registry}}:{{inputs.parameters.registry-port}}/{{inputs.parameters.registry-namespace}}/{{inputs.parameters.image}}"]
+        env:
+          - name: DOCKER_CONFIG
+            value: /root/.docker
+        volumeMount:
+          - name: docker-config
+            mountPath: /root/.docker
+    - name: push
+      inputs:
+        parameters:
+          - name: image
+          - name: registry
+          - name: registry-namespace
+          - name: registry-port
+          - name: registry-protocol
+      container:
+        image: docker:19.03.12
+        command: [docker]
+        args: ["push", "{{inputs.parameters.registry-protocol}}://{{inputs.parameters.registry}}:{{inputs.parameters.registry-port}}/{{inputs.parameters.registry-namespace}}/{{inputs.parameters.image}}"]
+        env:
+          - name: DOCKER_CONFIG
+            value: /root/.docker

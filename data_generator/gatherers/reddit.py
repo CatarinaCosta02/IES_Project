@@ -1,3 +1,4 @@
+import os
 import time
 
 import redis as redis
@@ -12,7 +13,7 @@ class RedditGatherer:
         self.app_secret = config.get("app_secret")
 
         self.auth = self._authenticate()
-        self.redis = redis.Redis(host='localhost', port=6379)
+        self.redis = redis.Redis(host=os.environ.get("REDIS_HOST", "localhost"), port=6379)
 
         self.THRESHOLD = 5  # in news
 
