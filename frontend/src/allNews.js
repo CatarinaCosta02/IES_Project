@@ -6,7 +6,7 @@ import Card from "./components/Card";
 
 
 
-function allNews() {
+function AllNews() {
     const [search, setSearch] = useState("");
 
     return (
@@ -89,4 +89,4 @@ function allNews() {
     );
 }
 
-export default allNews;
+export default AllNews;

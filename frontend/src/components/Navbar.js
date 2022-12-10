@@ -3,34 +3,36 @@ import { NavLink } from "react-router-dom";
 
 
 function Navbar({ isLogged }) {
+
+    
     return (
         <>
-            <div class="navbar bg-base-100">
-                <div class="flex-1">
+            <div className="navbar bg-black">
+                <div className="flex-1">
                     <img src={logo} className="max-w-sm rounded-lg lg:ml-10" />
                 </div>
 
-                <div class="flex-none gap-2">
-                    <ul class="menu menu-horizontal p-0">
-                        <li><NavLink className="nav-link" to="/userDashboard">Home</NavLink></li>
-                        <li><NavLink className="nav-link" to="/country">Country</NavLink></li>
-                        <li><NavLink className="nav-link" to="/allNews">allNews</NavLink></li>
-                        <li><NavLink className="nav-link" to="/about">About</NavLink></li>
+                <div className="flex-none gap-2">
+                    <ul className="menu menu-horizontal p-0">
+                        <li><NavLink className="nav-link" to="/dashboard">Home</NavLink></li>
+                        <li><NavLink className="nav-link" to="/dashboard/country">Country</NavLink></li>
+                        <li><NavLink className="nav-link" to="/dashboard/allNews">allNews</NavLink></li>
+                        <li><NavLink className="nav-link" to="/dashboard/about">About</NavLink></li>
                     </ul>
-                    <div class="form-control">
-                        <input type="text" placeholder="Search" class="input input-bordered" />
+                    <div className="form-control">
+                        <input type="text" placeholder="Search" className="input input-bordered" />
                     </div>
-                    <div class="dropdown dropdown-end">
-                        <label tabindex="0" class="btn btn-ghost btn-circle avatar">
-                            <div class="w-10 rounded-full">
+                    <div className="dropdown dropdown-end">
+                        <label tabindex="0" className="btn btn-ghost btn-circle avatar">
+                            <div className="w-10 rounded-full">
                                 <img src="https://placeimg.com/80/80/people" />
                             </div>
                         </label>
-                        <ul tabindex="0" class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
+                        <ul tabindex="0" className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
                             <li>
-                                <a class="justify-between">
+                                <a className="justify-between">
                                     Profile
-                                    <span class="badge">New</span>
+                                    <span className="badge">New</span>
                                 </a>
                             </li>
                             <li>

@@ -9,7 +9,7 @@ import UserDashboard from "./userDashboard";
 import News from "./news/news";
 import Country from './country';
 import About from './about';
-import allNews from './allNews';
+import AllNews from './allNews';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -21,6 +21,9 @@ root.render(
                 <Route path="/register" element={<Register />} />
                 <Route path="/dashboard/news" element={<News />} />
                 <Route path="/dashboard" element={<UserDashboard />} />
+                <Route path="/dashboard/country" element={<Country />} />
+                <Route path="/dashboard/about" element={<About />} />
+                <Route path="/dashboard/allNews" element={<AllNews />} />
                 
             </Routes>
         </BrowserRouter>

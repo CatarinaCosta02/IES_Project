@@ -1,40 +1,49 @@
 import './styles/App.module.scss';
 import Navbar from "./components/Navbar"
+import cidade from './images/Cidade.jpg';
 
 function Login() {
     return (
         <>
             <Navbar />
-            <div className="hero h-full bg-base-200 h-screen">
-                <div className="hero-content flex-col lg:flex-row-reverse">
-                    <div className="text-center lg:text-left pl-10">
-                        <h1 className="text-5xl font-bold">Login now!</h1>
-                        <p className="py-6">Don't miss what's happening around the globe</p>
-                    </div>
-                    <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 pr-10">
-                        <div className="card-body">
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Email</span>
-                                </label>
-                                <input type="text" placeholder="email" className="input input-bordered" />
-                            </div>
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Password</span>
-                                </label>
-                                <input type="text" placeholder="password" className="input input-bordered" />
-                                <label className="label">
-                                    <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
-                                </label>
-                            </div>
-                            <div className="form-control mt-6">
-                                <a href='./dashboard' className="btn btn-primary">Login</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div className="relative flex h-full w-full">
+        <div className="h-screen w-1/2 bg-black">
+          <div className="mx-auto flex h-full w-2/3 flex-col justify-center text-white xl:w-1/2">
+            <div className="text-center">
+              <p className="text-2xl">Please Login</p>
             </div>
+            <div>
+              <fieldset className="border-t border-solid border-gray-600">
+                <div className="mx-auto px-2 text-center text-sm"></div>
+              </fieldset>
+            </div>
+            <div className="mt-7">
+              <form>
+                <div>
+                  <label className="mb-2.5 block font-extrabold" for="email">Email</label>
+                  <input type="email" id="email" className="inline-block w-full rounded-full bg-white p-2.5 leading-none text-black placeholder-indigo-900 shadow placeholder:opacity-30" />
+                </div>
+                <div className="mt-4">
+                  <label className="mb-2.5 block font-extrabold" for="email">Password</label>
+                  <input type="password" id="email" className="inline-block w-full rounded-full bg-white p-2.5 leading-none text-black placeholder-indigo-900 shadow" />
+                </div>
+                <div className="mt-4 flex w-full flex-col justify-between sm:flex-row">
+                  <div><input type="checkbox" id="remember" /><label for="remember" className="mx-2 text-sm">Remember me</label></div>
+                  <div>
+                    <a href="#" className="text-sm hover:text-gray-200">Forgot password?</a>
+                  </div>
+                </div>
+                <div className="form-control my-10">
+                  <a href='./dashboard'  className=" inline-flex justify-center items-center rounded-full bg-gradient-to-r from-cyan-600 to-blue-700 hover:from-pink-500 hover:to-yellow-500 ...">Login </a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div className="h-screen w-1/2 bg-blue-600">
+          <img src={cidade} alt="cidade" className="h-full w-full object-cover" />
+        </div>
+      </div>
         </>
     )
 }
