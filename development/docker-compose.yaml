@@ -76,3 +76,8 @@ services:
       - RABBITMQ_HOST=rabbitmq
     depends_on:
       - rabbitmq
+
+  frontend:
+    build: ../frontend
+    ports:
+      - 3000:3000
