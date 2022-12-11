@@ -23,31 +23,6 @@ function UserDashboard() {
             </section>
             <section>
                 <div className="mx-auto w-[70%]">
-                    {search.length > 0 && (
-                        <>
-                            <h2 className="text-2xl py-4">Results for {search}</h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                <div className="card">
-                                    <div className="card-body">
-                                        <h2 className="card-title">Card Title</h2>
-                                        <p className="card-subtitle">Card Subtitle</p>
-                                        <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing
-                                            elit. Quisquam, quae.</p>
-                                        <a href="/dashboard/news">Join discussion</a>
-                                    </div>
-                                </div>
-                                <div className="card">
-                                    <div className="card-body">
-                                        <h2 className="card-title">Card Title</h2>
-                                        <p className="card-subtitle">Card Subtitle</p>
-                                        <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing
-                                            elit. Quisquam, quae.</p>
-                                        <a href="/dashboard/news">Join discussion</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </>
-                    )}
 
                     {search.length === 0 && (
                         <>

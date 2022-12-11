@@ -1,12 +1,13 @@
 import './styles/App.module.scss';
 import Navbar from "./components/Navbar"
 import cidade from './images/Cidade.jpg';
+import Footer from "./components/Footer"
 
 function Login() {
-    return (
-        <>
-            <Navbar />
-            <div className="relative flex h-full w-full">
+  return (
+    <>
+      <Navbar />
+      <div className="relative flex h-full w-full">
         <div className="h-screen w-1/2 bg-black">
           <div className="mx-auto flex h-full w-2/3 flex-col justify-center text-white xl:w-1/2">
             <div className="text-center">
@@ -33,9 +34,9 @@ function Login() {
                     <a href="#" className="text-sm hover:text-gray-200">Forgot password?</a>
                   </div>
                 </div>
-                <div className="form-control my-10">
-                  <a href='./dashboard'  className=" inline-flex justify-center items-center rounded-full bg-gradient-to-r from-cyan-600 to-blue-700 hover:from-pink-500 hover:to-yellow-500 ...">Login </a>
-                </div>
+                <div className="form-control my-4">
+                    <a href='./dashboard'  className=" inline-flex justify-center items-center rounded-full bg-gradient-to-r from-cyan-600 to-blue-700 hover:from-pink-500 hover:to-yellow-500 h-10 w-24 mx-auto">Login </a>
+                  </div>
               </form>
             </div>
           </div>
@@ -44,8 +45,9 @@ function Login() {
           <img src={cidade} alt="cidade" className="h-full w-full object-cover" />
         </div>
       </div>
-        </>
-    )
+      <Footer />
+    </>
+  )
 }
 
 
