@@ -21,13 +21,21 @@ function About() {
                 </div>
                 
             </div>
-            <div className="grid place-content-center h-48 bg-white mb-0">
+            <div className="grid place-content-center h-24 bg-white mb-0">
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <div>
-                    <p class="text-center ...">So I started to walk into the water...</p>
+                        <p class="text-center w-2/3 text-gray-600 mx-auto">Our application was designd to be used by ordinary people. No matter how old they are or what job they have or what they are interested in - because there is one thing that connects us against all differences - the news.</p>
                     </div>
                 </div>
                 
+            </div>
+
+            <div className="grid place-content-center h-24  bg-white mb-0">
+                <div className="hero-content flex-col lg:flex-row-reverse">
+                    <div>
+                        <p class="text-center w-2/3 text-gray-600 mx-auto">We always want to be informed about the current situations and latest trends in our world or our country. However, we have also to take into consideration that each person has different interests and priorities. That’s why our application is gonna personalize the news for each and every single user, because everyone is important to us. </p>
+                    </div>
+                </div>    
             </div>
 
             
