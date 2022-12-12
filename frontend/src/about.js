@@ -3,6 +3,7 @@ import logo from "./images/About2.jpg";
 import Navbar from "./components/Navbar"
 import Footer from "./components/Footer"
 import Card from "./components/Card";
+import logo2 from "./images/news.png";
 
 
 
@@ -60,6 +61,14 @@ function About() {
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <div>
                         <p class="text-center w-2/3 text-gray-600 mx-auto">We want to make your life easier and we are willing to do the worst part of finding the news from different sites and prepare the feedback with the results, just for you. </p>
+                    </div>
+                </div>    
+            </div>
+
+            <div className="grid place-content-center h-120  bg-white mb-0">
+                <div className="hero-content flex-col lg:flex-row-reverse">
+                    <div>
+                    <img src={logo2} alt="cidade" className="h-48 w-48 object-cover" />
                     </div>
                 </div>    
             </div>
