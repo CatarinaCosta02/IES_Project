@@ -25,37 +25,24 @@ function UserDashboard() {
                 </div>
             </section>
             <section>
-                <div className="grid place-content-center bg-zinc-900">
+                <div className="grid place-content-center bg-white">
 
                     {search.length === 0 && (
                         <>
-                            <h2 className="text-2xl text-black py-4">News</h2>
+                            <h2 className="text-2xl text-black py-4">For You</h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mx-auto max-w-6xl ">
                                 <Card2 />
                                 <Card2 />
                                 <Card2 />
                             </div>
 
-                            <h2 className="text-2xl text-black py-4">Politics</h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mx-auto max-w-6xl">
+                            <h2 className="text-2xl text-black py-4">Top News</h2>
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mx-auto max-w-6xl ">
                                 <Card2 />
                                 <Card2 />
                                 <Card2 />
                             </div>
 
-                            <h2 className="text-2xl py-4">Beauty</h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                <Card />
-                                <Card />
-                                <Card />
-                            </div>
-
-                            <h2 className="text-2xl py-4">Sports</h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                <Card />
-                                <Card />
-                                <Card />
-                            </div>
                         </>
                     )}
                 </div>
