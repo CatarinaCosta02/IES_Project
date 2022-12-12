@@ -30,6 +30,7 @@ function UserDashboard() {
                     {search.length === 0 && (
                         <>
                             <h2 className="text-2xl text-black py-4">For You</h2>
+                            
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mx-auto max-w-6xl ">
                                 <Card2 />
                                 <Card2 />
@@ -42,6 +43,36 @@ function UserDashboard() {
                                 <Card2 />
                                 <Card2 />
                             </div>
+
+                        </>
+                    )}
+                </div>
+
+                <div className="grid place-content-center bg-white">
+
+                    {search.length === 0 && (
+                        <>
+                        <h2 className="text-2xl text-black py-4">Top News</h2>
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
+                                <Card />
+                                <Card />
+                                <Card />
+                            </div>
+
+                            <h2 className="text-2xl text-black py-4">Top News</h2>
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mx-auto max-w-8xl ">
+                                <Card />
+                                <Card />
+                                <Card />
+                            </div>
+
+                            <h2 className="text-2xl text-black py-4">Top News</h2>
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mx-auto max-w-8xl ">
+                                <Card />
+                                <Card />
+                                <Card />
+                            </div>
+                            
 
                         </>
                     )}
