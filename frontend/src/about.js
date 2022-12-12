@@ -68,7 +68,7 @@ function About() {
             <div className="grid place-content-center h-120  bg-white mb-0">
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <div>
-                    <img src={logo2} alt="cidade" className="h-48 w-48 object-cover" />
+                    <img src={logo2} alt="cidade" className="h-40 w-40 object-cover" />
                     </div>
                 </div>    
             </div>
