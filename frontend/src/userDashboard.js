@@ -3,6 +3,7 @@ import logo from "./images/logo_b.png";
 import Navbar from "./components/Navbar"
 import Footer from "./components/Footer"
 import Card from "./components/Card";
+import cat from "./images/cat.jpg";
 
 
 
@@ -12,11 +13,12 @@ function UserDashboard() {
     return (
         <>
             <Navbar isLogged={true} />
-            <section className="hero min-h-screen/2 bg-base-200 mb-12">
+            <section className="hero min-h-screen/2 bg-black mb-12">
+                <img src={cat} alt="cidade" className="mx-auto max-w-5xl" />
                 <div className="hero-content flex-col lg:flex-row-reverse">
-                    <img src={logo} className="max-w-sm rounded-lg lg:ml-10" />
+                    <img src={logo} className="max-w-sm rounded-lg lg:ml-9" />
                     <div>
-                        <h1 className="text-7xl font-bold py-6">Welcome to What's New</h1>
+                        <h1 className="text-6xl text-white font-bold py-5">Welcome to What's New</h1>
                         <p className="py-1">Welcome back!</p>
                     </div>
                 </div>
