@@ -30,7 +30,7 @@ function UserDashboard() {
                     {search.length === 0 && (
                         <>
                             <h2 className="text-2xl text-black py-4">For You</h2>
-                            
+
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mx-auto max-w-6xl ">
                                 <Card2 />
                                 <Card2 />
@@ -48,31 +48,40 @@ function UserDashboard() {
                     )}
                 </div>
 
+                <div className="grid place-content-center h-42 bg-white">
+                    <div className="hero-content flex-col lg:flex-row-reverse">
+                        <div>
+                            <h2 className="mx-auto text-4xl font-bold py-6 bg-clip-text text-transparent bg-gradient-to-r from-cyan-600 to-blue-700" >Topics that might interest you</h2>
+                        </div>
+                    </div>
+
+                </div>
+
                 <div className="grid place-content-center bg-white">
 
                     {search.length === 0 && (
                         <>
-                        <h2 className="text-2xl text-black py-4">Top News</h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
+                            <h2 className="text-2xl text-black py-4">Sports</h2>
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                                 <Card />
                                 <Card />
                                 <Card />
                             </div>
 
-                            <h2 className="text-2xl text-black py-4">Top News</h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mx-auto max-w-8xl ">
+                            <h2 className="text-2xl text-black py-4">Beauty</h2>
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mx-auto max-w-8xl ">
                                 <Card />
                                 <Card />
                                 <Card />
                             </div>
 
-                            <h2 className="text-2xl text-black py-4">Top News</h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mx-auto max-w-8xl ">
+                            <h3 className="text-2xl text-black py-4">Technology</h3>
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mx-auto max-w-8xl ">
                                 <Card />
                                 <Card />
                                 <Card />
                             </div>
-                            
+
 
                         </>
                     )}
