@@ -18,7 +18,7 @@ function UserDashboard() {
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <img src={logo} className="max-w-sm rounded-lg lg:ml-9" />
                     <div>
-                        <h1 className="text-6xl text-white font-bold py-5">Welcome to What's New</h1>
+                        <h1 className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-600 to-blue-700 py-5">Welcome to What's New</h1>
                         <p className="text-center text-3xl text-white py-1">Welcome back!</p>
                     </div>
                 </div>

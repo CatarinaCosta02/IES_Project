@@ -15,8 +15,8 @@ function About() {
     return (
         <>
             <Navbar isLogged={true} />
-            <div className="hero min-h-screen/4 bg-black mb-0">
-                <img src={logo} alt="cidade" className="mx-auto max-w-7xl" />
+            <div className="hero max-h-screen/4 bg-black mb-0">
+                <img src={logo} alt="cidade" className="mx-auto max-w-3xl" />
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <div>
                         <h1 className="text-7xl font-bold py-6 bg-clip-text text-transparent bg-gradient-to-r from-cyan-600 to-blue-700" >About Us</h1>
