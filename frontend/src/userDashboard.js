@@ -15,12 +15,11 @@ function UserDashboard() {
         <>
             <Navbar isLogged={true} />
             <section className="hero min-h-screen/2 mb-0 puta">
-    
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <img src={logo} className="max-w-sm rounded-lg lg:ml-9" />
                     <div>
                         <h1 className="text-6xl text-white font-bold py-5">Welcome to What's New</h1>
-                        <p className="py-1">Welcome back!</p>
+                        <p className="text-center text-3xl text-white py-1">Welcome back!</p>
                     </div>
                 </div>
             </section>
