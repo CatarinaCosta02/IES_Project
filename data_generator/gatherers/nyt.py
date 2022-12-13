@@ -1,11 +1,12 @@
 import redis as redis
 import requests
+import os
 
 
 class NewYorkTimesGatherer:
     def __init__(self, api_key):
         self.api_key = api_key
-        self.redis = redis.Redis(host='localhost', port=6379)
+        self.redis = redis.Redis(host=os.environ.get("REDIS_HOST", "localhost"), port=6379)
 
     def in_cache(self, item):
         if not self.redis.sismember("nyt", item["uri"]):

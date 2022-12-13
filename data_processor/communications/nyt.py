@@ -20,7 +20,7 @@ class NewYorkTimesProtocol:
                 "title": item["title"],
                 "author": item["byline"],
                 "permalink": item["url"],
-                "num_comments": item["num_comments"],
+                "abstract": item["abstract"],
                 "created": item["created_date"]
             })
 
