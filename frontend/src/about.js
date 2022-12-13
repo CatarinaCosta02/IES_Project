@@ -25,7 +25,7 @@ function About() {
                 
             </div>
 
-            <div className="grid place-content-center h-32 bg-gray-300 mb-0">
+            <div className="grid place-content-center h-32 bg-white mb-0">
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <div>
                         <h2 className="mx-auto text-4xl font-bold py-6 bg-clip-text text-transparent bg-gradient-to-r from-cyan-600 to-blue-700" >Quality news, where you want it, when you want it.</h2>
@@ -34,7 +34,7 @@ function About() {
                 
             </div>
 
-            <div className="grid place-content-center h-24 bg-gray-300 mb-0">
+            <div className="grid place-content-center h-24 bg-white mb-0">
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <div>
                         <p class="text-center w-2/3 text-gray-600 mx-auto">Our web application was designd to be used by ordinary people. No matter how old they are or what job they have or what they are interested in - because there is one thing that connects us against all differences - the news.</p>
@@ -43,7 +43,7 @@ function About() {
                 
             </div>
 
-            <div className="grid place-content-center h-24  bg-gray-300 mb-0">
+            <div className="grid place-content-center h-24  bg-white mb-0">
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <div>
                         <p class="text-center w-2/3 text-gray-600 mx-auto">We always want to be informed about the current situations and latest trends in our world or our country. However, we have also to take into consideration that each person has different interests and priorities. That’s why our application is gonna personalize the news for each and every single user, because everyone is important to us. </p>
@@ -51,7 +51,7 @@ function About() {
                 </div>    
             </div>
 
-            <div className="grid place-content-center h-24  bg-gray-300 mb-0">
+            <div className="grid place-content-center h-24  bg-white mb-0">
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <div>
                         <p class="text-center w-2/3 text-gray-600 mx-auto">There are many news websites around the world, but ours takes a more important place in the user's needs. We know that the whole process of finding suitable information can be too demanding and exhausting for many people, so our goal is to make it as simple as possible. Because you deserve to be well informed and not to spend time on scrolling the pages with improper and completely useless information. </p>
@@ -59,7 +59,7 @@ function About() {
                 </div>    
             </div>
 
-            <div className="grid place-content-center h-24  bg-gray-300 mb-0">
+            <div className="grid place-content-center h-24  bg-white mb-0">
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <div>
                         <p class="text-center w-2/3 text-gray-600 mx-auto">We want to make your life easier and we are willing to do the worst part of finding the news from different sites and prepare the feedback with the results, just for you. </p>
@@ -67,10 +67,10 @@ function About() {
                 </div>    
             </div>
 
-            <div className="grid place-content-center h-200  bg-gray-300 mb-0">
+            <div className="grid place-content-center h-200  bg-white mb-0">
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <div>
-                    <img src={logo2} alt="cidade" className="h-40 w-40 object-cover" />
+                    <img src={logo2} alt="cidade" className="h-[11rem] w-[10rem]" />
                     </div>
                 </div>    
             </div>

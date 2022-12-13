@@ -1,10 +1,11 @@
 import comment from "../images/comment.svg";
 
+
 function Card2() {
     return (
         <>
 
-            <div className="card card-side bg-gray-300 shadow-xl">
+            <div className="card card-side bg-gray-300 shadow-xl rounded-none">
                 <figure><img src="https://placeimg.com/200/280/arch" alt="Movie" className="justify-items-start h-full" /></figure>
                 <div className="card-body">
                     <h2 className="card-title text-black">New movie is released!</h2>
