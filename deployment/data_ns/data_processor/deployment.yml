@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: data-processor # Name of the deployment
+  name: data-generator # Name of the deployment
   namespace: data # Name of the namespace
   labels:
-    app: data-processor # Name of your application
+    app: data-generator # Name of your application
 spec:
   selector:
     matchLabels:
-      app: data-processor # Name of your application
+      app: data-generator # Name of your application
   replicas: 1 # Number of replicas
   template:
     metadata:
       labels:
-        app: data-processor # Name of your application
+        app: data-generator # Name of your application
     spec:
       containers:
-      - name: data-processor
-        image: 10.108.89.79:5000/data-processor:1.0
+      - name: data-generator
+        image: 10.108.89.79:5000/data-generator:1.0
         imagePullPolicy: IfNotPresent
         resources:
           requests:
@@ -29,3 +29,5 @@ spec:
         env:
         - name: RABBITMQ_HOST
           value: rabbitmq.services.svc.cluster.local
+        - name: REDIS_HOST
+          value: redis.services.svc.cluster.local
