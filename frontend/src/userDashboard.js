@@ -3,7 +3,6 @@ import logo from "./images/logo_b.png";
 import Navbar from "./components/Navbar"
 import Footer from "./components/Footer"
 import Card from "./components/Card";
-import cat from "./images/city.jpg";
 import Card2 from "./components/Card2";
 import "./styles/puta.css"
 

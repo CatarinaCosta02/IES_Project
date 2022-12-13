@@ -15,8 +15,8 @@ function Navbar({ isLogged }) {
                 <div className="flex-none gap-2">
                     <ul className="menu menu-horizontal p-0">
                         <li><NavLink className="nav-link" to="/dashboard">Home</NavLink></li>
-                        <li><NavLink className="nav-link" to="/dashboard/country">Country</NavLink></li>
-                        <li><NavLink className="nav-link" to="/dashboard/allNews">allNews</NavLink></li>
+                        <li><NavLink className="nav-link" to="/dashboard/country">All News</NavLink></li>
+                        <li><NavLink className="nav-link" to="/dashboard/allNews">Country</NavLink></li>
                         <li><NavLink className="nav-link" to="/dashboard/about">About</NavLink></li>
                     </ul>
                     <div className="form-control">
