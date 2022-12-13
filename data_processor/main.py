@@ -1,3 +1,4 @@
+import os
 from pprint import pprint
 
 from communications.nyt import NewYorkTimesProtocol
@@ -6,7 +7,7 @@ from communications.hn import HNProtocol
 from communications.reddit import RedditProtocol
 
 if __name__ == "__main__":
-    proto = Protocol("localhost", ["reddit", "hn", "nyt"])
+    proto = Protocol(os.environ.get("RABBITMQ_HOST", "localhost"), ["reddit", "hn", "nyt"])
     reddit_parser = RedditProtocol(proto)
     hn_parser = HNProtocol(proto)
     nyt_parser = NewYorkTimesProtocol(proto)
