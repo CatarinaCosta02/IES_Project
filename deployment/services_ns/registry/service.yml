@@ -5,10 +5,11 @@ metadata:
   namespace: services
 spec:
   type: ClusterIP
+  externalIPs:
+    - 10.10.1.50
   selector:
     app: registry
   ports:
   - port: 5000
-    targetPort: 5000
     protocol: TCP
     name: registry
