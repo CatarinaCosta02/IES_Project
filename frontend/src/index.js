@@ -10,6 +10,7 @@ import News from "./news/news";
 import Country from './country';
 import About from './about';
 import AllNews from './allNews';
+import AboutF from './aboutFront';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -17,6 +18,7 @@ root.render(
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<App />} />
+                <Route path="/about" element={<AboutF />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/dashboard/news" element={<News />} />

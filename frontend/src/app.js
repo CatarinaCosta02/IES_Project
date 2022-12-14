@@ -2,12 +2,14 @@ import logo from './images/logo_b.png';
 import './styles/App.module.scss';
 import {useState} from "react";
 import Footer from './components/Footer';
+import NavbarFront from './components/NavbarFront';
 
 function App() {
     const [search, setSearch] = useState("");
 
     return (
     <>
+    <NavbarFront/>
         <section className="hero min-h-screen bg-base-200 mb-12">
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <img src={logo} className="max-w-sm rounded-lg lg:ml-10"/>

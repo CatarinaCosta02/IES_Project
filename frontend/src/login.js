@@ -6,7 +6,6 @@ import Footer from "./components/Footer"
 function Login() {
   return (
     <>
-      <Navbar />
       <div className="relative flex h-full w-full">
         <div className="h-screen w-1/2 bg-black">
           <div className="mx-auto flex h-full w-2/3 flex-col justify-center text-white xl:w-1/2">
