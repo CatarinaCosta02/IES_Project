@@ -15,10 +15,12 @@ function Navbar({ isLogged }) {
                 <div className="flex-none gap-2">
                     <ul className="menu menu-horizontal p-0 ">
                         <li><NavLink className="nav-link shadow bg-black " to="/dashboard">Home</NavLink></li>
-                        <li><NavLink className="nav-link shadow bg-black " to="/dashboard/country">All News</NavLink></li>
-                        <li><NavLink className="nav-link shadow bg-black " to="/dashboard/allNews">Country</NavLink></li>
+                        <li><NavLink className="nav-link shadow bg-black " to="/dashboard/allNews">All News</NavLink></li>
+                        <li><NavLink className="nav-link shadow bg-black " to="/dashboard/country">Country</NavLink></li>
                         <li><NavLink className="nav-link shadow bg-black " to="/dashboard/about">About</NavLink></li>
                     </ul>
+
+                    {/* user profile */}
                     <div className="dropdown dropdown-end">
                         <label tabindex="0" className="btn btn-ghost btn-circle avatar">
                             <div className="w-10 rounded-full">

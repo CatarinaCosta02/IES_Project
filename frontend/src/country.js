@@ -1,8 +1,9 @@
 import { useState } from "react";
-import logo from "./images/logo_b.png";
+import logo from "./images/w.jpg";
 import Navbar from "./components/Navbar"
 import Footer from "./components/Footer"
 import Card from "./components/Card";
+import Bottom from "./components/Bottom";
 
 
 
@@ -12,17 +13,16 @@ function Country() {
     return (
         <>
             <Navbar isLogged={true} />
-            <section className="hero min-h-screen/2 bg-base-200 mb-12">
+            <div className="hero max-h-screen/4 bg-black mb-0">
+                <img src={logo} alt="cidade" className="mx-auto max-w-3xl" />
                 <div className="hero-content flex-col lg:flex-row-reverse">
-                    <img src={logo} className="max-w-sm rounded-lg lg:ml-10" />
                     <div>
-                        <h1 className="text-7xl font-bold py-6">Welcome to What's New</h1>
-                        <p className="py-1">Welcome back!</p>
+                        <h1 className="text-7xl font-bold py-6 bg-clip-text text-transparent bg-gradient-to-r from-cyan-600 to-blue-700" >Country</h1>
                     </div>
-                </div>
-            </section>
+                </div>    
+            </div>
             <section>
-                <div className="mx-auto w-[70%]">
+                <div className="mx-auto bg-white">
                     {search.length > 0 && (
                         <>
                             <h2 className="text-2xl py-4">Results for {search}</h2>
@@ -83,6 +83,7 @@ function Country() {
                 </div>
             </section>
 
+            <Bottom/>
             <Footer />
         </>
 
