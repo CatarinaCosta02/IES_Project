@@ -1,0 +1,4 @@
+// ARCH
+sudo trust anchor --store ../deployment/services_ns/registry/registry.crt
+sudo trust anchor --remove ../deployment/services_ns/registry/registry.crt
+

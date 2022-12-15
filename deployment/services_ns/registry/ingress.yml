@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: registry # Name of the ingress object
+  namespace: services # Name of the namespace
+spec:
+  rules:
+  - host: registry.internal.whatsnew  # Your hostname
+    http:
+      schema: https
+      paths:
+      # Path-based routing settings:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: registry  # The name of the service
+            port:
+              number: 5000  # Service Portnumber
