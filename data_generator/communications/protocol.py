@@ -5,8 +5,8 @@ from communications.communicationlayer import CommunicationLayer
 
 
 class Protocol(CommunicationLayer):
-    def __init__(self, host, client=False):
-        super().__init__(host)
+    def __init__(self, host, queues, client=False):
+        super().__init__(host, queues)
         self.rec_callbacks = dict()
         if not client:
             self.bind_request_callback(self._general_callback)
@@ -29,12 +29,7 @@ class Protocol(CommunicationLayer):
         if payload is not None:
             data["payload"] = payload
 
-        if type_ == "reddit":
-            self.send_reddit_response(json.dumps(data).encode())
-        elif type_ == "hn":
-            self.send_hn_response(json.dumps(data).encode())
-        else:
-            print("Invalid type: {}".format(type_))
+        self.send_response_to_queue(json.dumps(data).encode(), type_)
 
     def send_data_request(self, type_, method, payload=None):
         data = {
@@ -61,6 +56,8 @@ class Protocol(CommunicationLayer):
             print('Malformed packet: {}'.format(body))
         except ValueError:
             print('Malformed request: {}'.format(body))
+        finally:
+            ch.basic_ack(delivery_tag=method.delivery_tag)
 
     @staticmethod
     def verify_request(body, required):

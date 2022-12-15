@@ -1,7 +1,7 @@
 from communications.protocol import Protocol
 
 if __name__ == "__main__":
-    proto = Protocol("localhost", client=True)
+    proto = Protocol("localhost", ["hn", "reddit"], client=True)
 
     proto.register_response_callback(lambda ch, method, properties, body: print("R", body), "reddit")
     proto.register_response_callback(lambda ch, method, properties, body: print("H", body), "hn")

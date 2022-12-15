@@ -13,13 +13,13 @@ public class Producer {
     @Autowired
     RabbitTemplate rabbitMQ;
 
-    @Scheduled(fixedRate=5000)
+    @Scheduled(fixedRate=30000)
     public void requestHN(){
         rabbitMQ.convertAndSend("data_gen", "requests",
                 "{\"type\": \"hn\",\"method\": \"top_stories\"}");
     }
 
-    @Scheduled(fixedRate=5000)
+    @Scheduled(fixedRate=30000)
     public void requestReddit(){
         rabbitMQ.convertAndSend("data_gen", "requests",
                 "{\"type\": \"reddit\",\"method\": \"top_stories\"}");
