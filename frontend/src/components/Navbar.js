@@ -20,6 +20,8 @@ function Navbar({ isLogged }) {
                         <li><NavLink className="nav-link shadow bg-black " to="/dashboard/about">About</NavLink></li>
                     </ul>
 
+                    
+
                     {/* user profile */}
                     <div className="dropdown dropdown-end">
                         <label tabindex="0" className="btn btn-ghost btn-circle avatar">
