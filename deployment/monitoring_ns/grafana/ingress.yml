@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: grafana # Name of the ingress object
+  namespace: monitoring # Name of the namespace
+spec:
+  rules:
+  - host: grafana.internal.whatsnew  # Your hostname
+    http:
+      paths:
+      # Path-based routing settings:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: kube-stack-prometheus-grafana  # The name of the service
+            port:
+              number: 80  # Service Portnumber
