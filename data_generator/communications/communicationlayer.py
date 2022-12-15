@@ -19,7 +19,8 @@ class CommunicationLayer:
 
     def bind_request_callback(self, callback):
         self.channel.basic_consume(
-            queue='requests', on_message_callback=callback)
+            queue='requests', on_message_callback=callback
+        )
 
     def bind_reddit_response_callback(self, callback):
         self.channel.basic_consume(

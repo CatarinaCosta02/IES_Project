@@ -35,7 +35,6 @@ public class Consumer {
         ObjectMapper mapper = new ObjectMapper();
         NewsMQ news = mapper.readValue(message, NewsMQ.class);
         for (NewsPayload payload : news.getPayload()) {
-            payload.setSource("HN");
             IndexQuery indexQuery = new IndexQueryBuilder()
                     .withIndex("news")
                     .withObject(payload)
@@ -50,14 +49,15 @@ public class Consumer {
     public void consumeReddit(String message) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         NewsMQ news = mapper.readValue(message, NewsMQ.class);
-        for (NewsPayload payload : news.getPayload()) {
-            payload.setSource("Reddit");
-            IndexQuery indexQuery = new IndexQueryBuilder()
-                    .withIndex("news")
-                    .withObject(payload)
-                    .build();
+        if (news.getSuccess()) {
+            for (NewsPayload payload : news.getPayload()) {
+                IndexQuery indexQuery = new IndexQueryBuilder()
+                        .withIndex("news")
+                        .withObject(payload)
+                        .build();
 
-            elasticsearchOperations.index(indexQuery, IndexCoordinates.of("news"));
+                elasticsearchOperations.index(indexQuery, IndexCoordinates.of("news"));
+            }
         }
     }
 

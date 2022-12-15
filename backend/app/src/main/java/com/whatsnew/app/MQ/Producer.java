@@ -22,6 +22,6 @@ public class Producer {
     @Scheduled(fixedRate=30000)
     public void requestReddit(){
         rabbitMQ.convertAndSend("data_gen", "requests",
-                "{\"type\": \"reddit\",\"method\": \"top_stories\"}");
+                "{\"type\": \"reddit\",\"method\": \"gather_all\"}");
     }
 }
