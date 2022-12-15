@@ -9,6 +9,7 @@ public class Config {
 
     public final static String QUEUE_HN = "hn";
     public final static String QUEUE_REDDIT = "reddit";
+    public final static String QUEUE_NYT = "nyt";
 
     public final static String QUEUE_REQUEST = "requests";
 
@@ -19,6 +20,7 @@ public class Config {
     public final static String EXCHANGE_API = "api";
     public final static String ROUTING_KEY_HN = "hn";
     public final static String ROUTING_KEY_REDDIT = "reddit";
+    public final static String ROUTING_KEY_NYT = "nyt";
 
     public final static String ROUTING_KEY_REQUEST = "requests";
 
@@ -35,6 +37,11 @@ public class Config {
     @Bean
     public Queue queueReddit() {
         return new Queue(QUEUE_REDDIT, true);
+    }
+
+    @Bean
+    public Queue queueNYT() {
+        return new Queue(QUEUE_NYT, true);
     }
 
     @Bean
@@ -72,6 +79,11 @@ public class Config {
     @Bean
     public Binding bindingReddit() {
         return BindingBuilder.bind(queueReddit()).to(exchange()).with(ROUTING_KEY_REDDIT);
+    }
+
+    @Bean
+    public Binding bindingNYT() {
+        return BindingBuilder.bind(queueNYT()).to(exchange()).with(ROUTING_KEY_NYT);
     }
 
     @Bean
