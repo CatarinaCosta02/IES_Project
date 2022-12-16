@@ -62,6 +62,22 @@ public class Consumer {
     }
 
 
+    @RabbitListener(queues = Config.QUEUE_NYT)
+    public void consumeNYT(String message) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        NewsMQ news = mapper.readValue(message, NewsMQ.class);
+        for (NewsPayload payload : news.getPayload()) {
+            payload.setSource("NYT");
+            IndexQuery indexQuery = new IndexQueryBuilder()
+                    .withIndex("news")
+                    .withObject(payload)
+                    .build();
+
+            elasticsearchOperations.index(indexQuery, IndexCoordinates.of("news"));
+        }
+    }
+
+
     @RabbitListener(queues = Config.QUEUE_API)
     public String consumeAPI(String message) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();

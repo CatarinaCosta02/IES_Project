@@ -24,4 +24,10 @@ public class Producer {
         rabbitMQ.convertAndSend("data_gen", "requests",
                 "{\"type\": \"reddit\",\"method\": \"top_stories\"}");
     }
+
+    @Scheduled(fixedRate=30000)
+    public void requestNYT(){
+        rabbitMQ.convertAndSend("data_gen", "requests",
+                "{\"type\": \"nyt\",\"method\": \"top_stories\"}");
+    }
 }

@@ -22,7 +22,7 @@ public class EKNews {
     private String author;
 
     @Field(type = FieldType.Integer)
-    private int score;
+    private Integer score = null;
 
     @Field(type = FieldType.Text)
     private String permalink;
@@ -32,6 +32,9 @@ public class EKNews {
 
     @Field(type = FieldType.Integer)
     private int created;
+
+    @Field(type = FieldType.Text)
+    private String summary = null;
 
     @Field(type = FieldType.Text)
     private String source = null;
