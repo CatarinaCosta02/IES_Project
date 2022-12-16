@@ -1,6 +1,7 @@
 import os
 import time
 
+import pathos as pathos
 import redis as redis
 import requests
 
@@ -112,7 +113,7 @@ class RedditGatherer:
 
         return data
 
-    def top_stories(self):
+    def top_stories(self, _):
         payload = {
             "t": "all",
             "limit": 4 * self.THRESHOLD
@@ -178,9 +179,8 @@ class RedditGatherer:
             return None
 
     def gather_all(self):
-        result = [
-            ("top_by_subreddit", self.top_stories_by_subreddit(subreddit))
-            for subreddit in self.SUBREDDITS_TO_SCAN
-        ]
-        result.append(("top_stories", self.top_stories()))
-        return result
+        data = []
+        with pathos.multiprocessing.ProcessingPool(nodes=len(self.SUBREDDITS_TO_SCAN) // 2 + 1) as pool:
+            data += map(lambda res: ("top_stories", res), pool.map(self.top_stories, [None]))
+            data += map(lambda res: ("top_by_subreddit", res), pool.map(self.top_stories_by_subreddit, self.SUBREDDITS_TO_SCAN))
+        return data

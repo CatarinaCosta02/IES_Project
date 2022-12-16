@@ -1,3 +1,4 @@
+import pathos as pathos
 import redis as redis
 import requests
 import os
@@ -31,7 +32,7 @@ class NewYorkTimesGatherer:
         except:
             return None
 
-    def top_stories(self):
+    def top_stories(self, _):
         data = self.hit_api(f"https://api.nytimes.com/svc/topstories/v2/home.json?api-key={self.api_key}")
         if data is None:
             return None
@@ -49,10 +50,8 @@ class NewYorkTimesGatherer:
         return data
 
     def gather_all(self):
-        result = [
-            ("top_by_topic", self.top_stories_in_topic(topic))
-            for topic in self.TOPICS
-        ]
-        result.append(("top_stories", self.top_stories()))
-        return result
-
+        data = []
+        with pathos.multiprocessing.ProcessingPool(8) as pool:
+            data += map(lambda res: ("top_stories", res), pool.map(self.top_stories, [None]))
+            data += pool.map(self.top_stories_in_topic, self.TOPICS)
+        return data
