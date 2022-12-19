@@ -1,4 +1,5 @@
 import json
+import datetime
 
 
 class NewYorkTimesProtocol:
@@ -23,9 +24,9 @@ class NewYorkTimesProtocol:
                 "title": item["title"],
                 "author": item["byline"],
                 "permalink": item["url"],
-                "abstract": item["abstract"],
-                "created": item["created_date"],
-                "source": source
+                "source": source,
+                "summary": item["abstract"],
+                "created": datetime.datetime.fromisoformat(item["created_date"]).timestamp()
             })
 
         byte_data = json.dumps({
