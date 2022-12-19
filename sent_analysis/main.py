@@ -45,6 +45,7 @@ model.add(Embedding(len(tokenizer.word_index) + 1, 64, input_length=200))
 model.add(SpatialDropout1D(0.25))
 model.add(Bidirectional(LSTM(256, dropout=0.5, recurrent_dropout=0.5)))
 model.add(Dropout(0.2))
+model.add(Dense(1, activation='sigmoid'))
 
 model.add(Dense(1, activation='sigmoid'))
 
