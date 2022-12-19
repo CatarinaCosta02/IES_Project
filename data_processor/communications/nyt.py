@@ -13,6 +13,9 @@ class NewYorkTimesProtocol:
         self.channel.queue_bind(exchange='finished_data', queue='nyt')
 
     def process(self, data):
+        topic = data["payload"].get("__topic", None)
+        source = "NYT." + topic if topic is not None else "NYT"
+
         useful_data = data["payload"]["results"]
         treated_data = []
 
@@ -21,6 +24,7 @@ class NewYorkTimesProtocol:
                 "title": item["title"],
                 "author": item["byline"],
                 "permalink": item["url"],
+                "source": source,
                 "summary": item["abstract"],
                 "created": datetime.datetime.fromisoformat(item["created_date"]).timestamp()
             })

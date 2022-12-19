@@ -12,6 +12,7 @@ services:
       - cluster.name=docker-cluster
       - ELASTIC_PASSWORD=changeme
     image: docker.elastic.co/elasticsearch/elasticsearch:8.5.1
+    mem_limit: 2048m
 
   rabbitmq:
     image: rabbitmq:3.11-management
@@ -76,6 +77,8 @@ services:
       - RABBITMQ_HOST=rabbitmq
     depends_on:
       - rabbitmq
+    ports:
+      - 8081:5000
 
   frontend:
     build: ../frontend
