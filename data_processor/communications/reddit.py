@@ -1,6 +1,8 @@
 import json
 import pika
 
+from models import loader
+
 
 class RedditProtocol:
     def __init__(self, receive_protocol):
@@ -16,14 +18,18 @@ class RedditProtocol:
         useful_data = data["payload"]["data"]["children"]
         treated_data = []
         for item in useful_data:
-            treated_data.append({
-                "title": item["data"]["title"],
-                "author": item["data"]["author"],
-                "score": item["data"]["score"],
-                "permalink": item["data"]["permalink"],
-                "num_comments": item["data"]["num_comments"],
-                "created": item["data"]["created_utc"]
-            })
+            if all(key in item["data"] for key in ("title", "author", "permalink", "score", "created_utc", "num_comments")):
+                sentiment = loader.predict(item["data"]["title"])
+
+                treated_data.append({
+                    "title": item["data"]["title"],
+                    "author": item["data"]["author"],
+                    "score": item["data"]["score"],
+                    "permalink": item["data"]["permalink"],
+                    "num_comments": item["data"]["num_comments"],
+                    "created": item["data"]["created_utc"],
+                    "sentiment": sentiment
+                })
 
         byte_data = json.dumps({
             "kind": data["method"],

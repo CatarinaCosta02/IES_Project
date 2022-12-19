@@ -1,6 +1,8 @@
 import json
 import pika
 
+from models import loader
+
 
 class HNProtocol:
     def __init__(self, receive_protocol):
@@ -18,12 +20,15 @@ class HNProtocol:
 
         for item in useful_data:
             if all(key in item for key in ("title", "by", "url", "score", "time")):
+                sentiment = loader.predict(item["title"])
+
                 treated_data.append({
                     "title": item["title"],
                     "author": item["by"],
                     "score": item["score"],
                     "permalink": item["url"],
-                    "created": item["time"]
+                    "created": item["time"],
+                    "sentiment": sentiment
                 })
 
         bytes_data = json.dumps({

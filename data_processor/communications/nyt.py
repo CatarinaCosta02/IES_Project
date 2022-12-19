@@ -1,6 +1,8 @@
 import json
 import datetime
 
+from models import loader
+
 
 class NewYorkTimesProtocol:
     def __init__(self, receive_protocol):
@@ -17,13 +19,17 @@ class NewYorkTimesProtocol:
         treated_data = []
 
         for item in useful_data:
-            treated_data.append({
-                "title": item["title"],
-                "author": item["byline"],
-                "permalink": item["url"],
-                "summary": item["abstract"],
-                "created": datetime.datetime.fromisoformat(item["created_date"]).timestamp()
-            })
+            if all(key in item for key in ("title", "byline", "url", "abstract", "created_date")):
+                sentiment = loader.predict(item["abstract"])
+
+                treated_data.append({
+                    "title": item["title"],
+                    "author": item["byline"],
+                    "permalink": item["url"],
+                    "summary": item["abstract"],
+                    "created": datetime.datetime.fromisoformat(item["created_date"]).timestamp(),
+                    "sentiment": sentiment
+                })
 
         byte_data = json.dumps({
             "kind": data["method"],
