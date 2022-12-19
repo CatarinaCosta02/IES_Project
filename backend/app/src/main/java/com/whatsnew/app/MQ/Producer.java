@@ -28,6 +28,6 @@ public class Producer {
     @Scheduled(fixedRate=30000)
     public void requestNYT(){
         rabbitMQ.convertAndSend("data_gen", "requests",
-                "{\"type\": \"nyt\",\"method\": \"top_stories\"}");
+                "{\"type\": \"nyt\",\"method\": \"gather_all\"}");
     }
 }
