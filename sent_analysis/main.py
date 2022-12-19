@@ -47,8 +47,6 @@ model.add(Bidirectional(LSTM(256, dropout=0.5, recurrent_dropout=0.5)))
 model.add(Dropout(0.2))
 model.add(Dense(1, activation='sigmoid'))
 
-model.add(Dense(1, activation='sigmoid'))
-
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
 model.fit(train_X, train_Y, epochs=2, batch_size=128, validation_data=(test_X, test_Y))
