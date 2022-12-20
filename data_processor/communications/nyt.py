@@ -15,13 +15,14 @@ class NewYorkTimesProtocol:
         self.channel.queue_bind(exchange='finished_data', queue='nyt')
 
     def process(self, data):
-        topic = data["payload"].get("__topic", None)
-        source = "NYT." + topic if topic is not None else "NYT"
 
         useful_data = data["payload"]["results"]
         treated_data = []
 
         for item in useful_data:
+            topic = item.get("__topic", None)
+            source = "NYT." + topic if topic is not None else "NYT"
+
             if all(key in item for key in ("title", "byline", "url", "abstract", "created_date")):
                 sentiment = loader.predict(item["abstract"])
 
