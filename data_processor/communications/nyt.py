@@ -15,6 +15,14 @@ class NewYorkTimesProtocol:
         self.channel.queue_bind(exchange='finished_data', queue='nyt')
 
     def process(self, data):
+        if not data["success"]:
+            byte_data = json.dumps({
+                "kind": data["method"],
+                "payload": [],
+                "success": False
+            }).encode("utf-8")
+            self.channel.basic_publish(exchange='finished_data', routing_key='reddit', body=byte_data)
+            return
 
         useful_data = data["payload"]["results"]
         treated_data = []

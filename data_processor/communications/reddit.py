@@ -37,7 +37,7 @@ class RedditProtocol:
                     "title": item["data"]["title"],
                     "author": item["data"]["author"],
                     "score": item["data"]["score"],
-                    "permalink": item["data"]["permalink"],
+                    "permalink": "reddit.com" + item["data"]["permalink"],
                     "num_comments": item["data"]["num_comments"],
                     "created": item["data"]["created_utc"],
                     "sentiment": sentiment,
