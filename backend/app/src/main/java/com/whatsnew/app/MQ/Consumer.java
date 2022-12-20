@@ -1,19 +1,24 @@
 package com.whatsnew.app.MQ;
 
+import co.elastic.clients.elasticsearch.core.SearchRequest;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.whatsnew.app.models.ApiRequest;
-import com.whatsnew.app.models.EKNews;
-import com.whatsnew.app.models.NewsMQ;
-import com.whatsnew.app.models.NewsPayload;
+import com.whatsnew.app.models.*;
 import com.whatsnew.app.repositories.EKNewsRepository;
+import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.MultiMatchQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.elasticsearch.client.erhlc.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
+import org.springframework.data.elasticsearch.core.SearchHit;
+import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
-import org.springframework.data.elasticsearch.core.query.IndexQuery;
-import org.springframework.data.elasticsearch.core.query.IndexQueryBuilder;
+import org.springframework.data.elasticsearch.core.query.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -84,13 +89,13 @@ public class Consumer {
         ApiRequest apiRequest = mapper.readValue(message, ApiRequest.class);
         switch (apiRequest.getAction()) {
             case "SEARCH": {
-                List<EKNews> results = ekNewsRepository.searchByTitle(apiRequest.getPayload().getQuery());
-                return mapper.writeValueAsString(results);
+                ApiPayload apiPayload = apiRequest.getPayload();
+
+                List<EKNews> news = ekNewsRepository.findByTitleAndTopicAndCountry(apiPayload.getTitle(), apiPayload.getTopic(), apiPayload.getCountry());
+                return mapper.writeValueAsString(news);
             }
         }
-
         // return a message error
         return "{\"error\": \"Invalid action\"}";
     }
-
 }

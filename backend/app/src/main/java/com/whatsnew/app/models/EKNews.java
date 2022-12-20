@@ -34,6 +34,12 @@ public class EKNews {
     private int created;
 
     @Field(type = FieldType.Text)
+    private String topic = null;
+
+    @Field(type = FieldType.Text)
+    private String country = null;
+
+    @Field(type = FieldType.Text)
     private String summary = null;
 
     @Field(type = FieldType.Text)

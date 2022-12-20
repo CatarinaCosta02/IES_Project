@@ -17,6 +17,8 @@ public class NewsPayload {
     private String permalink;
     private Integer num_comments = null;
     private int created;
+    private String topic = null;
+    private String country = null;
     private String summary = null;
     private String source = null;
 }

@@ -10,5 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ApiPayload {
-    private String query = null;
+    private String topic = null;
+    private String title = null;
+    private String country = null;
 }

@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.whatsnew.api.MQ.Config;
 import com.whatsnew.api.error.RuntimeError;
 import jakarta.websocket.server.PathParam;
-import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,13 +16,23 @@ public class Routes {
     RabbitTemplate rabbit;
 
     @GetMapping("/api/search")
-    public String HelloRabbit(@PathParam("query") String query) throws JsonProcessingException {
+    public String HelloRabbit(@PathParam("topic") String topic, @PathParam("title") String title,
+                              @PathParam("country") String country) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
-        if (query == null) {
+
+        if (title == null) {
             return mapper.writeValueAsString(new RuntimeError("No query provided"));
         }
 
-        SearchQuery sq = new SearchQuery(query);
+        if (topic == null) {
+            topic = "*";
+        }
+
+        if (country == null) {
+            country = "*";
+        }
+
+        SearchQuery sq = new SearchQuery(topic, title, country);
         ApiRequest ar = new ApiRequest("SEARCH", sq);
         return (String) rabbit.convertSendAndReceive(Config.EXCHANGE, Config.QUEUE_API, mapper.writeValueAsString(ar));
     }
