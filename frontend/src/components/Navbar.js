@@ -3,7 +3,15 @@ import { NavLink } from "react-router-dom";
 
 
 function Navbar({ isLogged }) {
-
+    const categories = [
+        "movies",
+        "sports",
+        "Health",
+        "politics",
+        "science",
+        "business",
+        "fashion",
+        ]
     
     return (
         <>
@@ -20,69 +28,27 @@ function Navbar({ isLogged }) {
                             <a className="btn btn-ghost rounded-btn">Button</a>
                             <div className="dropdown dropdown-end">
                                 <label tabIndex={0} className="btn btn-ghost rounded-btn">Search</label>
-                                <ul tabIndex={0} className="menu dropdown-content p-2 shadow bg-base-100 rounded-box w-80 mt-4">
+                                <ul tabIndex={1} className="menu dropdown-content p-2 shadow bg-base-100 rounded-box w-80 mt-4">
                                     <input type="text" placeholder="Search..." className="input input-ghost w-full max-w-xs" />
-                                    <div tabIndex={0} className="collapse collapse-arrow border border-transparent bg-transparent rounded-box pt-1">
-                                        <div className="collapse-title text-xl font-medium">
-                                            Advanced Filters
+                                    <div className="collapse">
+                                        <input type="checkbox" className="peer" />
+                                        <div className="collapse-title">
+                                            <b>Advanced Filters</b>
                                         </div>
-                                        <div className="collapse-content h-auto"> 
-                                            <li className='pl-1 text-xl'>Topics</li>
-                                            <div className="form-control">
-                                                <label className="label cursor-pointer">
-                                                    <span className="label-text">Sports</span> 
-                                                    <input type="checkbox" checked className="checkbox checkbox-primary" />
-                                                </label>
-                                            </div>
-                                            <div className="form-control">
-                                                <label className="label cursor-pointer">
-                                                    <span className="label-text">Science</span> 
-                                                    <input type="checkbox" checked className="checkbox checkbox-primary" />
-                                                </label>
-                                            </div>
-                                            <div className="form-control">
-                                                <label className="label cursor-pointer">
-                                                    <span className="label-text">Politics</span> 
-                                                    <input type="checkbox" checked className="checkbox checkbox-primary" />
-                                                </label>
-                                            </div>
-                                            <div className="form-control">
-                                                <label className="label cursor-pointer">
-                                                    <span className="label-text">Movies</span> 
-                                                    <input type="checkbox" checked className="checkbox checkbox-primary" />
-                                                </label>
-                                            </div>
-                                            <div className="form-control">
-                                                <label className="label cursor-pointer">
-                                                    <span className="label-text">Technology</span> 
-                                                    <input type="checkbox" checked className="checkbox checkbox-primary" />
-                                                </label>
-                                            </div>
-                                            <div className="form-control">
-                                                <label className="label cursor-pointer">
-                                                    <span className="label-text">Health</span> 
-                                                    <input type="checkbox" checked className="checkbox checkbox-primary" />
-                                                </label>
-                                            </div>
-                                            <div className="form-control">
-                                                <label className="label cursor-pointer">
-                                                    <span className="label-text">Business</span> 
-                                                    <input type="checkbox" checked className="checkbox checkbox-primary" />
-                                                </label>
-                                            </div>
-                                            <div className="form-control">
-                                                <label className="label cursor-pointer">
-                                                    <span className="label-text">Fashion    </span> 
-                                                    <input type="checkbox" checked className="checkbox checkbox-primary" />
-                                                </label>
+                                        <div className="collapse-content">
+                                            <div className="flex justify-between items-center">
+                                                <li className='pl-1 text-s'>Categories</li>
+                                                <select className="select select-ghost select-sm">
+                                                    {categories.map((category, index) => (
+                                                        <option key={index}>{category}</option>
+                                                    ))}
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
                                 </ul>
                             </div>
                         </div>
-
-                        
 
                         <li><NavLink className="nav-link shadow bg-black " to="/dashboard/about">About</NavLink></li>
                     </ul>
