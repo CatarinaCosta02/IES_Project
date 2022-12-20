@@ -15,9 +15,21 @@ class RedditProtocol:
         self.channel.queue_bind(exchange='finished_data', queue='reddit')
 
     def process(self, data):
+        if not data["success"]:
+            byte_data = json.dumps({
+                "kind": data["method"],
+                "payload": [],
+                "success": False
+            }).encode("utf-8")
+            self.channel.basic_publish(exchange='finished_data', routing_key='reddit', body=byte_data)
+            return
+
         useful_data = data["payload"]["data"]["children"]
         treated_data = []
         for item in useful_data:
+            subreddit = data["payload"].get("__subreddit", None)
+            source = "Reddit." + subreddit if subreddit is not None else "Reddit"
+
             if all(key in item["data"] for key in ("title", "author", "permalink", "score", "created_utc", "num_comments")):
                 sentiment = loader.predict(item["data"]["title"])
 
@@ -28,7 +40,8 @@ class RedditProtocol:
                     "permalink": item["data"]["permalink"],
                     "num_comments": item["data"]["num_comments"],
                     "created": item["data"]["created_utc"],
-                    "sentiment": sentiment
+                    "sentiment": sentiment,
+                    "source": source
                 })
 
         byte_data = json.dumps({

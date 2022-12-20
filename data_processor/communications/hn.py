@@ -28,7 +28,8 @@ class HNProtocol:
                     "score": item["score"],
                     "permalink": item["url"],
                     "created": item["time"],
-                    "sentiment": sentiment
+                    "sentiment": sentiment,
+                    "source": "HN"
                 })
 
         bytes_data = json.dumps({

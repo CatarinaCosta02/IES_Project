@@ -17,6 +17,7 @@ services:
       interval: 10s
       timeout: 10s
       retries: 10
+    mem_limit: 2048m
 
   rabbitmq:
     image: rabbitmq:3.11-management
@@ -95,6 +96,8 @@ services:
     depends_on:
       rabbitmq:
         condition: service_healthy
+    ports:
+      - 8081:5000
 
   frontend:
     build: ../frontend
