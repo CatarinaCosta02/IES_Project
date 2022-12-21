@@ -19,6 +19,15 @@ public class EKNews {
     private String title;
 
     @Field(type = FieldType.Text)
+    private String _class;
+
+    @Field(type = FieldType.Text)
+    private String topic;
+
+    @Field(type = FieldType.Text)
+    private String country;
+
+    @Field(type = FieldType.Text)
     private String author;
 
     @Field(type = FieldType.Integer)

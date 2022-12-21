@@ -35,6 +35,8 @@ class RedditProtocol:
                 "permalink": "reddit.com" + item["data"]["permalink"],
                 "num_comments": item["data"]["num_comments"],
                 "created": item["data"]["created_utc"],
+                "topic": data["payload"].get("topic", None),
+                "country": data["payload"].get("country", None),
                 "source": source
             })
 

@@ -1,8 +1,17 @@
 package com.whatsnew.app.MQ;
 
+import co.elastic.clients.elasticsearch.ElasticsearchClient;
+import co.elastic.clients.json.jackson.JacksonJsonpMapper;
+import co.elastic.clients.transport.ElasticsearchTransport;
+import co.elastic.clients.transport.rest_client.RestClientTransport;
+import org.apache.http.HttpHost;
+import org.elasticsearch.client.RestClient;
+import org.springframework.amqp.core.Binding;
+import org.springframework.amqp.core.BindingBuilder;
+import org.springframework.amqp.core.DirectExchange;
+import org.springframework.amqp.core.Queue;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.amqp.core.*;
 
 @Configuration
 public class Config {
@@ -99,6 +108,16 @@ public class Config {
     @Bean
     public Consumer receiver() {
         return new Consumer();
+    }
+
+    // ELASTICSEARCH CONFIGURATION
+    @Bean
+    public ElasticsearchClient elasticsearchConfig() {
+        RestClient restClient = RestClient.builder(
+                new HttpHost("localhost", 9200)).build();
+        ElasticsearchTransport transport = new RestClientTransport(
+                restClient, new JacksonJsonpMapper());
+        return new ElasticsearchClient(transport);
     }
 }
 

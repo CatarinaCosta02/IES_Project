@@ -17,13 +17,13 @@ public class Routes {
     RabbitTemplate rabbit;
 
     @GetMapping("/api/search")
-    public String HelloRabbit(@PathParam("query") String query) throws JsonProcessingException {
+    public String HelloRabbit(@PathParam("title") String title, @PathParam("topic") String topic, @PathParam("country") String country) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
-        if (query == null) {
+        if (title == null) {
             return mapper.writeValueAsString(new RuntimeError("No query provided"));
         }
 
-        SearchQuery sq = new SearchQuery(query);
+        SearchQuery sq = new SearchQuery(title, topic, country);
         ApiRequest ar = new ApiRequest("SEARCH", sq);
         return (String) rabbit.convertSendAndReceive(Config.EXCHANGE, Config.QUEUE_API, mapper.writeValueAsString(ar));
     }

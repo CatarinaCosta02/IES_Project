@@ -1,12 +1,14 @@
 package com.whatsnew.app.MQ;
 
+import co.elastic.clients.elasticsearch.core.SearchResponse;
+import co.elastic.clients.elasticsearch.core.search.Hit;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.whatsnew.app.models.ApiRequest;
 import com.whatsnew.app.models.EKNews;
 import com.whatsnew.app.models.NewsMQ;
 import com.whatsnew.app.models.NewsPayload;
-import com.whatsnew.app.repositories.EKNewsRepository;
+import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.data.elasticsearch.core.query.IndexQuery;
 import org.springframework.data.elasticsearch.core.query.IndexQueryBuilder;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -25,7 +28,7 @@ public class Consumer {
     private ElasticsearchOperations elasticsearchOperations;
 
     @Autowired
-    private EKNewsRepository ekNewsRepository;
+    private ElasticsearchClient client;
 
     @Autowired
     RabbitTemplate rabbitMQ;
@@ -79,13 +82,30 @@ public class Consumer {
 
 
     @RabbitListener(queues = Config.QUEUE_API)
-    public String consumeAPI(String message) throws JsonProcessingException {
+    public String consumeAPI(String message) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         ApiRequest apiRequest = mapper.readValue(message, ApiRequest.class);
         switch (apiRequest.getAction()) {
             case "SEARCH": {
-                List<EKNews> results = ekNewsRepository.searchByTitle(apiRequest.getPayload().getQuery());
-                return mapper.writeValueAsString(results);
+                SearchResponse<EKNews> search = client.search(s -> s
+                                .index("news")
+                                .query(q -> q.bool(b -> {
+                                    b.must(m -> m.match(ma -> ma.field("title").query(apiRequest.getPayload().getTitle())));
+
+                                    if (apiRequest.getPayload().getCountry() != null) {
+                                        b.must(m -> m.match(ma -> ma.field("country").query(apiRequest.getPayload().getCountry())));
+                                    }
+
+                                    if (apiRequest.getPayload().getTopic() != null) {
+                                        b.must(m -> m.match(ma -> ma.field("topic").query(apiRequest.getPayload().getTopic())));
+                                    }
+
+                                    return b;
+                                })),
+                    EKNews.class);
+
+                List<EKNews> hits = search.hits().hits().stream().map(Hit::source).toList();
+                return mapper.writeValueAsString(hits);
             }
         }
 
