@@ -4,6 +4,7 @@ import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.json.jackson.JacksonJsonpMapper;
 import co.elastic.clients.transport.ElasticsearchTransport;
 import co.elastic.clients.transport.rest_client.RestClientTransport;
+import io.netty.resolver.NameResolver;
 import org.apache.http.HttpHost;
 import org.elasticsearch.client.RestClient;
 import org.springframework.amqp.core.Binding;
@@ -117,8 +118,11 @@ public class Config {
     // ELASTICSEARCH CONFIGURATION
     @Bean
     public ElasticsearchClient elasticsearchConfig() {
+        String host = elasticUri.split(":")[0];
+        int port = Integer.parseInt(elasticUri.split(":")[1]);
+
         RestClient restClient = RestClient.builder(
-                new HttpHost(elasticUri)).build();
+                new HttpHost(host, port)).build();
         ElasticsearchTransport transport = new RestClientTransport(
                 restClient, new JacksonJsonpMapper());
         return new ElasticsearchClient(transport);

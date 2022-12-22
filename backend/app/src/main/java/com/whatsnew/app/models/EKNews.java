@@ -47,4 +47,7 @@ public class EKNews {
 
     @Field(type = FieldType.Text)
     private String source = null;
+
+    @Field(type = FieldType.Float)
+    private Float sentiment = null;
 }

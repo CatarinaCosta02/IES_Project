@@ -83,6 +83,7 @@ public class Consumer {
 
     @RabbitListener(queues = Config.QUEUE_API)
     public String consumeAPI(String message) throws IOException {
+        System.out.println("Received message: " + message);
         ObjectMapper mapper = new ObjectMapper();
         ApiRequest apiRequest = mapper.readValue(message, ApiRequest.class);
         switch (apiRequest.getAction()) {
