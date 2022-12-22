@@ -21,4 +21,5 @@ public class NewsPayload {
     private String country = null;
     private String summary = null;
     private String source = null;
+    private Float sentiment = null;
 }

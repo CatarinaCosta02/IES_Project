@@ -12,6 +12,11 @@ services:
       - cluster.name=docker-cluster
       - ELASTIC_PASSWORD=changeme
     image: docker.elastic.co/elasticsearch/elasticsearch:8.5.1
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9200/"]
+      interval: 10s
+      timeout: 10s
+      retries: 10
     mem_limit: 2048m
 
   rabbitmq:
@@ -23,12 +28,15 @@ services:
       - RABBITMQ_DEFAULT_USER=guest
       - RABBITMQ_DEFAULT_PASS=guest
       - RABBITMQ_DEFAULT_VHOST=/
-      - RABBITMQ_ERLANG_COOKIE=secretcookie
       - RABBITMQ_NODENAME=rabbit@rabbitmq
-      - RABBITMQ_USE_LONGNAME=true
       - RABBITMQ_LOGS=- 
       - RABBITMQ_SASL_LOGS=- 
       - RABBITMQ_MNESIA_BASE=/var/lib/rabbitmq/mnesia/rabbit@rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 10s
+      retries: 10
 
   kibana:
     image: docker.elastic.co/kibana/kibana:8.5.1
@@ -44,6 +52,11 @@ services:
     ports:
       - 6379:6379
       - 8001:8001
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 10s
+      retries: 10
 
 
   data_gen:
@@ -52,15 +65,18 @@ services:
       - RABBITMQ_HOST=rabbitmq
       - REDIS_HOST=redis
     depends_on:
-      - rabbitmq
-      - redis
+      rabbitmq:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
 
   data_proc:
     build: ../data_processor
     environment:
       - RABBITMQ_HOST=rabbitmq
     depends_on:
-      - rabbitmq
+      rabbitmq:
+        condition: service_healthy
 
   backend_logic:
     build: ../backend/app
@@ -68,15 +84,18 @@ services:
       - RABBITMQ_HOST=rabbitmq
       - ELASTICSEARCH_HOST=http://es01:9200
     depends_on:
-      - rabbitmq
-      - es01
+      rabbitmq:
+        condition: service_healthy
+      es01:
+        condition: service_healthy
 
   api:
     build: ../API/api
     environment:
       - RABBITMQ_HOST=rabbitmq
     depends_on:
-      - rabbitmq
+      rabbitmq:
+        condition: service_healthy
     ports:
       - 5000:8081
 

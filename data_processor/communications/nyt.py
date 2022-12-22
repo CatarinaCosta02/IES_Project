@@ -1,6 +1,8 @@
 import json
 import datetime
 
+from models import loader
+
 
 class NewYorkTimesProtocol:
     def __init__(self, receive_protocol):
@@ -22,23 +24,28 @@ class NewYorkTimesProtocol:
             self.channel.basic_publish(exchange='finished_data', routing_key='nyt', body=byte_data)
             return
 
-        topic = data["payload"].get("__topic", None)
-        source = "NYT." + topic if topic is not None else "NYT"
 
         useful_data = data["payload"]["results"]
         treated_data = []
 
         for item in useful_data:
-            treated_data.append({
-                "title": item["title"],
-                "author": item["byline"],
-                "permalink": item["url"],
-                "source": source,
-                "summary": item["abstract"],
+            topic = item.get("__topic", None)
+            source = "NYT." + topic if topic is not None else "NYT"
+
+            if all(key in item for key in ("title", "byline", "url", "abstract", "created_date")):
+                sentiment = loader.predict(item["abstract"])
+
+                treated_data.append({
+                    "title": item["title"],
+                    "author": item["byline"],
+                    "permalink": item["url"],
+                    "summary": item["abstract"],
                 "topic": data["payload"].get("topic", None),
                 "country": data["payload"].get("country", None),
-                "created": datetime.datetime.fromisoformat(item["created_date"]).timestamp()
-            })
+                    "created": datetime.datetime.fromisoformat(item["created_date"]).timestamp(),
+                    "sentiment": sentiment,
+                    "source": source,
+                })
 
         byte_data = json.dumps({
             "kind": data["method"],
