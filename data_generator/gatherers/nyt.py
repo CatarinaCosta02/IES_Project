@@ -28,11 +28,14 @@ class NewYorkTimesGatherer:
 
     def hit_api(self, url):
         try:
-            return requests.get(url).json()
+            resp = requests.get(url).json()
+            if "results" in resp:
+                return resp
+            return None
         except:
             return None
 
-    def top_stories(self, _):
+    def top_stories(self, _=None):
         data = self.hit_api(f"https://api.nytimes.com/svc/topstories/v2/home.json?api-key={self.api_key}")
         if data is None:
             return None
@@ -53,5 +56,5 @@ class NewYorkTimesGatherer:
         data = []
         with pathos.multiprocessing.ProcessingPool(8) as pool:
             data += map(lambda res: ("top_stories", res), pool.map(self.top_stories, [None]))
-            data += pool.map(self.top_stories_in_topic, self.TOPICS)
+            data += map(lambda res: ("top_in_topic", res), pool.map(self.top_stories_in_topic, self.TOPICS))
         return data

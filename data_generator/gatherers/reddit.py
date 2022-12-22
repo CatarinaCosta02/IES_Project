@@ -113,7 +113,7 @@ class RedditGatherer:
 
         return data
 
-    def top_stories(self, _):
+    def top_stories(self, _=None):
         payload = {
             "t": "all",
             "limit": 4 * self.THRESHOLD
