@@ -10,6 +10,7 @@ import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.Queue;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -34,6 +35,9 @@ public class Config {
     public final static String ROUTING_KEY_NYT = "nyt";
     public final static String ROUTING_KEY_REQUEST = "requests";
     public final static String ROUTING_KEY_API = "api";
+
+    @Value("${whatsnew.elasticsearch.uris}")
+    private String elasticUri;
 
 
 
@@ -114,7 +118,7 @@ public class Config {
     @Bean
     public ElasticsearchClient elasticsearchConfig() {
         RestClient restClient = RestClient.builder(
-                new HttpHost("localhost", 9200)).build();
+                new HttpHost(elasticUri)).build();
         ElasticsearchTransport transport = new RestClientTransport(
                 restClient, new JacksonJsonpMapper());
         return new ElasticsearchClient(transport);

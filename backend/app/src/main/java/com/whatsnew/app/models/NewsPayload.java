@@ -21,6 +21,4 @@ public class NewsPayload {
     private String country = null;
     private String summary = null;
     private String source = null;
-    private String topic = null;
-    private String country = null;
 }
