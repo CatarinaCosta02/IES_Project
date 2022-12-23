@@ -39,7 +39,7 @@ function Topics() {
 
             <main className={styles.main}>
                 <HottestNews />
-                <Navigation />
+                <Navigation active="Topics" />
                 <Gallery />
             </main>
         </>
