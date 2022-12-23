@@ -1,0 +1,41 @@
+.hero {
+  margin: 0;
+  padding: 0;
+
+  background-color: #D9D9D9;
+
+  height: 50vh;
+
+  .container {
+    padding: 20px 60px;
+  }
+
+  .lead {
+    color: #000;
+
+    margin: 0;
+    padding: 0;
+  }
+
+  .pitch {
+    color: #000;
+
+    margin: 0;
+    padding: 0 0 0 2.5em;
+  }
+}
+
+@media screen and (max-height: 600px) {
+  .hero {
+    height: 100vh;
+  }
+}
+
+.main {
+  margin: 50px 40px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 20vw calc(60vw - 100px) 20vw;
+  grid-gap: 10px;
+  grid-template-areas: "hottest gallery nav";
+}

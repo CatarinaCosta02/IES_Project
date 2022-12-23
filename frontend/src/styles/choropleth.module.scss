@@ -1,0 +1,49 @@
+.selected {
+    background-color: #f00;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  background-color: #E4E4E4;
+}
+
+.map {
+  height: 100%;
+  flex-grow: 1;
+  display: block;
+}
+
+.list {
+  width: 25%;
+  margin-left: 10px;
+  position: relative;
+
+  h3 {
+    margin: 0;
+    padding: 20px 0;
+  }
+
+  .buttonLst {
+    overflow-y: scroll;
+    max-height: available;
+    position: absolute;
+
+    bottom: 0;
+    top: 70px;
+  }
+
+  button {
+    display: block;
+    background-color: transparent;
+    border: none;
+
+    padding-bottom: 8px;
+
+    text-align: left;
+
+    padding-left: 30px;
+    cursor: pointer;
+  }
+}
