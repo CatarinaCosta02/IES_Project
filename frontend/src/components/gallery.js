@@ -2,14 +2,12 @@ import styles from "../styles/gallery.module.scss"
 import RedditCard from "./redditCard";
 
 
-function Gallery() {
+function Gallery({ data }) {
     return (
         <div className={styles.gallery}>
-            <RedditCard title="A reddit history #1" topic="fashion" desc="Noice" />
-            <RedditCard title="A reddit history #2" topic="fashion" desc="Noice" />
-            <RedditCard title="A reddit history #3" topic="fashion" desc="Noice" />
-            <RedditCard title="A reddit history #4" topic="fashion" desc="Noice" />
-            <RedditCard title="A reddit history #5" topic="fashion" desc="Noice" />
+            {data.map((article, index) => (
+                <RedditCard key={index} title={article.title} url={article.url} topic={article.topic} desc={article.description} />
+            ))}
         </div>
     )
 }

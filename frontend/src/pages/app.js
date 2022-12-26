@@ -21,7 +21,7 @@ function App() {
             <main className={styles.main}>
                 <HottestNews />
                 <Navigation />
-                <Gallery />
+                <Gallery data={[]} />
             </main>
         </>
     );

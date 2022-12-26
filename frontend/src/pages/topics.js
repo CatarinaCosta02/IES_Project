@@ -40,7 +40,7 @@ function Topics() {
             <main className={styles.main}>
                 <HottestNews />
                 <Navigation active="Topics" />
-                <Gallery />
+                <Gallery data={[]} />
             </main>
         </>
     );

@@ -20,7 +20,7 @@ function Countries() {
             <main className={styles.main}>
                 <HottestNews />
                 <Navigation active="Countries" />
-                <Gallery />
+                <Gallery data={[]} />
             </main>
         </>
     );
