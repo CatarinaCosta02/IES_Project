@@ -2,7 +2,6 @@
 import pickle
 
 import pandas as pd
-import tensorflow as tf
 from keras.layers import SpatialDropout1D, Dropout
 
 from tensorflow.keras.preprocessing.text import Tokenizer

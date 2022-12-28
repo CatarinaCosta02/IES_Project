@@ -1,24 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './styles/index.scss';
-import App from './app';
+import './styles/global.scss';
+import 'leaflet/dist/leaflet.css';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Login from "./login";
-import Register from "./register";
-import UserDashboard from "./userDashboard";
-import News from "./news/news";
+
+import App from './pages/app';
+import Signin from "./pages/signin";
+import Signup from "./pages/signup";
+import Countries from "./pages/countries";
+import Topics from "./pages/topics";
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-      <BrowserRouter>
-          <Routes>
-              <Route path="/" element={<App />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/dashboard" element={<UserDashboard />} />
-              <Route path="/dashboard/news" element={<News />} />
-          </Routes>
-      </BrowserRouter>
-  </React.StrictMode>
+    <React.StrictMode>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<App />} />
+                <Route path="/signin" element={<Signin />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/countries" element={<Countries />} />
+                <Route path="/topics" element={<Topics />} />
+            </Routes>
+        </BrowserRouter>
+    </React.StrictMode>
 );
