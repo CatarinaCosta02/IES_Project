@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: data-processor # Name of the deployment
+  namespace: data # Name of the namespace
+  labels:
+    app: data-processor # Name of your application
+spec:
+  selector:
+    matchLabels:
+      app: data-processor # Name of your application
+  replicas: 1 # Number of replicas
+  template:
+    metadata:
+      labels:
+        app: data-processor # Name of your application
+    spec:
+      containers:
+      - name: data-processor
+        image: 10.108.89.79:5000/data-processor:1.0
+        imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        env:
+        - name: RABBITMQ_HOST
+          value: rabbitmq.services.svc.cluster.local
