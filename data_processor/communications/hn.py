@@ -38,6 +38,8 @@ class HNProtocol:
                     "permalink": item["url"],
                     "created": item["time"],
                     "sentiment": sentiment,
+                    "topic": None,
+                    "country": None,
                     "source": "HN"
                 })
 
