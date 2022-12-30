@@ -35,7 +35,19 @@ public class Routes {
         }
 
         SearchQuery sq = new SearchQuery(null,null, country);
-        ApiRequest ar = new ApiRequest("GET_BY_COUNTRY", sq);
+        ApiRequest ar = new ApiRequest("SEARCH_BY_COUNTRY", sq);
+        return (String) rabbit.convertSendAndReceive(Config.EXCHANGE, Config.QUEUE_API, mapper.writeValueAsString(ar));
+    }
+
+    @GetMapping("/api/search/topics")
+    public String getNewsWithTopic(@PathParam("topic") String topic) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        if (topic == null) {
+            return mapper.writeValueAsString(new RuntimeError("No query provided"));
+        }
+
+        SearchQuery sq = new SearchQuery(null, topic, null);
+        ApiRequest ar = new ApiRequest("SEARCH_BY_TOPIC", sq);
         return (String) rabbit.convertSendAndReceive(Config.EXCHANGE, Config.QUEUE_API, mapper.writeValueAsString(ar));
     }
 

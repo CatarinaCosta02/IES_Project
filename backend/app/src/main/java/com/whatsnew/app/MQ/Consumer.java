@@ -122,6 +122,19 @@ public class Consumer {
                 return mapper.writeValueAsString(hits);
             }
 
+            case "SEARCH_BY_TOPIC": {
+                SearchResponse<EKNews> search = client.search(s -> s
+                                .index("news")
+                                .query(q -> q.bool(b -> {
+                                    b.must(m -> m.match(ma -> ma.field("topic").query(apiRequest.getPayload().getTopic())));
+                                    return b;
+                                })),
+                        EKNews.class);
+
+                List<EKNews> hits = search.hits().hits().stream().map(Hit::source).toList();
+                return mapper.writeValueAsString(hits);
+            }
+
 
         }
 
