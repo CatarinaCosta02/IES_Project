@@ -101,6 +101,7 @@ public class Consumer {
             case "SEARCH": {
                 SearchResponse<EKNews> search = client.search(s -> s
                                 .index("news")
+                                .size(10000)
                                 .query(q -> q.bool(b -> {
                                     b.must(m -> m.match(ma -> ma.field("title").query(apiRequest.getPayload().getTitle())));
 
@@ -123,6 +124,7 @@ public class Consumer {
             case "SEARCH_BY_COUNTRY": {
                 SearchResponse<EKNews> search = client.search(s -> s
                                 .index("news")
+                                .size(10000)
                                 .query(q -> q.bool(b -> {
                                     b.must(m -> m.match(ma -> ma.field("country").query(apiRequest.getPayload().getCountry())));
                                     return b;
@@ -136,6 +138,7 @@ public class Consumer {
             case "SEARCH_BY_TOPIC": {
                 SearchResponse<EKNews> search = client.search(s -> s
                                 .index("news")
+                                .size(10000)
                                 .query(q -> q.bool(b -> {
                                     b.must(m -> m.match(ma -> ma.field("topic").query(apiRequest.getPayload().getTopic())));
                                     return b;
@@ -149,7 +152,7 @@ public class Consumer {
             case "GET_DISTINCT_COUNTRIES": {
                 Map<String, Aggregation> map = new HashMap<>();
                 Aggregation aggregation = new Aggregation.Builder()
-                        .terms(new TermsAggregation.Builder().field("country.keyword").build())
+                        .terms(new TermsAggregation.Builder().field("country.keyword").size(10000).build())
                         .build();
                 map.put("agg_country", aggregation);
 
@@ -178,7 +181,7 @@ public class Consumer {
             case "GET_DISTINCT_TOPICS": {
                 Map<String, Aggregation> map = new HashMap<>();
                 Aggregation aggregation = new Aggregation.Builder()
-                        .terms(new TermsAggregation.Builder().field("topic.keyword").build())
+                        .terms(new TermsAggregation.Builder().field("topic.keyword").size(10000).build())
                         .build();
                 map.put("agg_topic", aggregation);
 
