@@ -1,5 +1,12 @@
 package com.whatsnew.app.MQ;
 
+import co.elastic.clients.elasticsearch._types.aggregations.Aggregation;
+import co.elastic.clients.elasticsearch._types.aggregations.MultiBucketBase;
+import co.elastic.clients.elasticsearch._types.aggregations.StringTermsBucket;
+import co.elastic.clients.elasticsearch._types.aggregations.TermsAggregation;
+import co.elastic.clients.elasticsearch._types.query_dsl.MatchQuery;
+import co.elastic.clients.elasticsearch._types.query_dsl.Query;
+import co.elastic.clients.elasticsearch.core.SearchRequest;
 import co.elastic.clients.elasticsearch.core.SearchResponse;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -19,7 +26,11 @@ import org.springframework.data.elasticsearch.core.query.IndexQueryBuilder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class Consumer {
@@ -135,8 +146,37 @@ public class Consumer {
                 return mapper.writeValueAsString(hits);
             }
 
+            case "GET_DISTINCT_COUNTRIES": {
+                Map<String, Aggregation> map = new HashMap<>();
+                Aggregation aggregation = new Aggregation.Builder()
+                        .terms(new TermsAggregation.Builder().field("country.keyword").build())
+                        .build();
+                map.put("agg_country", aggregation);
+
+                SearchRequest searchRequest = new SearchRequest.Builder()
+                        .index("news")
+                        .size(0)
+                        .aggregations(map)
+                        .build();
+
+                SearchResponse<Void> response = client.search(searchRequest, Void.class);
+
+                List<StringTermsBucket> buckets = response.aggregations()
+                        .get("agg_country")
+                        .sterms()
+                        .buckets().array();
+
+                List<String> countries = new ArrayList<>();
+                for (StringTermsBucket bucket: buckets) {
+                    countries.add(bucket.key().stringValue());
+                }
+
+                return mapper.writeValueAsString(countries);
+            }
+
 
         }
+
 
         // return a message error
         return "{\"error\": \"Invalid action\"}";

@@ -51,4 +51,12 @@ public class Routes {
         return (String) rabbit.convertSendAndReceive(Config.EXCHANGE, Config.QUEUE_API, mapper.writeValueAsString(ar));
     }
 
+
+    @GetMapping("/api/countries")
+    public String getCountries() throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        ApiRequest ar = new ApiRequest("GET_DISTINCT_COUNTRIES", null);
+        return (String) rabbit.convertSendAndReceive(Config.EXCHANGE, Config.QUEUE_API, mapper.writeValueAsString(ar));
+    }
+
 }
