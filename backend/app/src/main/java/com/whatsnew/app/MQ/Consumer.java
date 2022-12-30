@@ -108,6 +108,21 @@ public class Consumer {
                 List<EKNews> hits = search.hits().hits().stream().map(Hit::source).toList();
                 return mapper.writeValueAsString(hits);
             }
+
+            case "SEARCH_BY_COUNTRY": {
+                SearchResponse<EKNews> search = client.search(s -> s
+                                .index("news")
+                                .query(q -> q.bool(b -> {
+                                    b.must(m -> m.match(ma -> ma.field("country").query(apiRequest.getPayload().getCountry())));
+                                    return b;
+                                })),
+                        EKNews.class);
+
+                List<EKNews> hits = search.hits().hits().stream().map(Hit::source).toList();
+                return mapper.writeValueAsString(hits);
+            }
+
+
         }
 
         // return a message error
