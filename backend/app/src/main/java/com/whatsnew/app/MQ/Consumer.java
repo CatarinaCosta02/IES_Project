@@ -1,11 +1,8 @@
 package com.whatsnew.app.MQ;
 
 import co.elastic.clients.elasticsearch._types.aggregations.Aggregation;
-import co.elastic.clients.elasticsearch._types.aggregations.MultiBucketBase;
 import co.elastic.clients.elasticsearch._types.aggregations.StringTermsBucket;
 import co.elastic.clients.elasticsearch._types.aggregations.TermsAggregation;
-import co.elastic.clients.elasticsearch._types.query_dsl.MatchQuery;
-import co.elastic.clients.elasticsearch._types.query_dsl.Query;
 import co.elastic.clients.elasticsearch.core.SearchRequest;
 import co.elastic.clients.elasticsearch.core.SearchResponse;
 import co.elastic.clients.elasticsearch.core.search.Hit;
@@ -30,7 +27,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+
 
 @Service
 public class Consumer {
@@ -98,7 +95,7 @@ public class Consumer {
         ObjectMapper mapper = new ObjectMapper();
         ApiRequest apiRequest = mapper.readValue(message, ApiRequest.class);
         switch (apiRequest.getAction()) {
-            case "SEARCH": {
+            case "SEARCH" -> {
                 SearchResponse<EKNews> search = client.search(s -> s
                                 .index("news")
                                 .size(10000)
@@ -115,13 +112,12 @@ public class Consumer {
 
                                     return b;
                                 })),
-                    EKNews.class);
+                        EKNews.class);
 
                 List<EKNews> hits = search.hits().hits().stream().map(Hit::source).toList();
                 return mapper.writeValueAsString(hits);
             }
-
-            case "SEARCH_BY_COUNTRY": {
+            case "SEARCH_BY_COUNTRY" -> {
                 SearchResponse<EKNews> search = client.search(s -> s
                                 .index("news")
                                 .size(10000)
@@ -134,8 +130,7 @@ public class Consumer {
                 List<EKNews> hits = search.hits().hits().stream().map(Hit::source).toList();
                 return mapper.writeValueAsString(hits);
             }
-
-            case "SEARCH_BY_TOPIC": {
+            case "SEARCH_BY_TOPIC" -> {
                 SearchResponse<EKNews> search = client.search(s -> s
                                 .index("news")
                                 .size(10000)
@@ -148,8 +143,7 @@ public class Consumer {
                 List<EKNews> hits = search.hits().hits().stream().map(Hit::source).toList();
                 return mapper.writeValueAsString(hits);
             }
-
-            case "GET_DISTINCT_COUNTRIES": {
+            case "GET_DISTINCT_COUNTRIES" -> {
                 Map<String, Aggregation> map = new HashMap<>();
                 Aggregation aggregation = new Aggregation.Builder()
                         .terms(new TermsAggregation.Builder().field("country.keyword").size(10000).build())
@@ -170,15 +164,13 @@ public class Consumer {
                         .buckets().array();
 
                 List<String> countries = new ArrayList<>();
-                for (StringTermsBucket bucket: buckets) {
+                for (StringTermsBucket bucket : buckets) {
                     countries.add(bucket.key().stringValue());
                 }
 
                 return mapper.writeValueAsString(countries);
             }
-
-
-            case "GET_DISTINCT_TOPICS": {
+            case "GET_DISTINCT_TOPICS" -> {
                 Map<String, Aggregation> map = new HashMap<>();
                 Aggregation aggregation = new Aggregation.Builder()
                         .terms(new TermsAggregation.Builder().field("topic.keyword").size(10000).build())
@@ -199,14 +191,21 @@ public class Consumer {
                         .buckets().array();
 
                 List<String> topics = new ArrayList<>();
-                for (StringTermsBucket bucket: buckets) {
+                for (StringTermsBucket bucket : buckets) {
                     topics.add(bucket.key().stringValue());
                 }
 
                 return mapper.writeValueAsString(topics);
             }
+            case "GET_ALL_NEWS" -> {
+                SearchResponse<EKNews> search = client.search(s -> s
+                                .index("news")
+                                .size(10000),
+                        EKNews.class);
 
-
+                List<EKNews> hits = search.hits().hits().stream().map(Hit::source).toList();
+                return mapper.writeValueAsString(hits);
+            }
         }
 
 

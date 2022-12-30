@@ -16,7 +16,7 @@ public class Routes {
     RabbitTemplate rabbit;
 
     @GetMapping("/api/search")
-    public String HelloRabbit(@PathParam("title") String title, @PathParam("topic") String topic, @PathParam("country") String country) throws JsonProcessingException {
+    public String getNewsAfterAdvancedSearch(@PathParam("title") String title, @PathParam("topic") String topic, @PathParam("country") String country) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         if (title == null) {
             return mapper.writeValueAsString(new RuntimeError("No query provided"));
@@ -63,6 +63,13 @@ public class Routes {
     public String getTopics() throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         ApiRequest ar = new ApiRequest("GET_DISTINCT_TOPICS", null);
+        return (String) rabbit.convertSendAndReceive(Config.EXCHANGE, Config.QUEUE_API, mapper.writeValueAsString(ar));
+    }
+
+    @GetMapping("/api/news")
+    public String getAllNews() throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        ApiRequest ar = new ApiRequest("GET_ALL_NEWS", null);
         return (String) rabbit.convertSendAndReceive(Config.EXCHANGE, Config.QUEUE_API, mapper.writeValueAsString(ar));
     }
 
