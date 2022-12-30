@@ -59,4 +59,11 @@ public class Routes {
         return (String) rabbit.convertSendAndReceive(Config.EXCHANGE, Config.QUEUE_API, mapper.writeValueAsString(ar));
     }
 
+    @GetMapping("/api/topics")
+    public String getTopics() throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        ApiRequest ar = new ApiRequest("GET_DISTINCT_TOPICS", null);
+        return (String) rabbit.convertSendAndReceive(Config.EXCHANGE, Config.QUEUE_API, mapper.writeValueAsString(ar));
+    }
+
 }

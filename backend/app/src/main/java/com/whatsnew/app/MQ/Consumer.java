@@ -175,6 +175,35 @@ public class Consumer {
             }
 
 
+            case "GET_DISTINCT_TOPICS": {
+                Map<String, Aggregation> map = new HashMap<>();
+                Aggregation aggregation = new Aggregation.Builder()
+                        .terms(new TermsAggregation.Builder().field("topic.keyword").build())
+                        .build();
+                map.put("agg_topic", aggregation);
+
+                SearchRequest searchRequest = new SearchRequest.Builder()
+                        .index("news")
+                        .size(0)
+                        .aggregations(map)
+                        .build();
+
+                SearchResponse<Void> response = client.search(searchRequest, Void.class);
+
+                List<StringTermsBucket> buckets = response.aggregations()
+                        .get("agg_topic")
+                        .sterms()
+                        .buckets().array();
+
+                List<String> topics = new ArrayList<>();
+                for (StringTermsBucket bucket: buckets) {
+                    topics.add(bucket.key().stringValue());
+                }
+
+                return mapper.writeValueAsString(topics);
+            }
+
+
         }
 
 
