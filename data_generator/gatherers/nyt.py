@@ -49,6 +49,7 @@ class NewYorkTimesGatherer:
             return None
 
         data["results"] = list(filter(lambda i: i is not None and not self.in_cache(i), data["results"]))
+        data["topic"] = topic
         data["__topic"] = topic
         return data
 

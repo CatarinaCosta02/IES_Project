@@ -11,5 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SearchQuery {
-    private String query;
+    private String title;
+    private String topic = null;
+    private String country = null;
 }

@@ -21,7 +21,7 @@ class HNProtocol:
                 "payload": [],
                 "success": False
             }).encode("utf-8")
-            self.channel.basic_publish(exchange='finished_data', routing_key='reddit', body=byte_data)
+            self.channel.basic_publish(exchange='finished_data', routing_key='hn', body=byte_data)
             return
 
         useful_data = data["payload"]
@@ -38,6 +38,8 @@ class HNProtocol:
                     "permalink": item["url"],
                     "created": item["time"],
                     "sentiment": sentiment,
+                    "topic": None,
+                    "country": None,
                     "source": "HN"
                 })
 
