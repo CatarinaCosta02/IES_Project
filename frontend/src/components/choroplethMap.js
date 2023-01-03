@@ -8,7 +8,7 @@ function ChoroplethMap({ onChange }) {
     const [country, setCountry] = useState(null);
     const [mapKey, setMapKey] = useState(0);
 
-    const usefulCountries = [];
+    const [usefulCountries, setUsefulCountries] = useState([]);
     useEffect(() => {
         const url = process.env.REACT_APP_API_URL + "/api/countries";
         fetch(url, {
@@ -16,7 +16,7 @@ function ChoroplethMap({ onChange }) {
         })
         .then(response => response.json())
         .then(data => {
-            usefulCountries.push(...data);
+            setUsefulCountries(data);
         })
         .catch(error => {
             console.error(error);

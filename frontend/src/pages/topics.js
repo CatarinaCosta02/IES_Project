@@ -11,7 +11,7 @@ import {useEffect, useState} from "react";
 
 
 function Topics() {
-    const topics = [];
+    const [topics, setTopics] = useState([]);
     useEffect(() => {
         const url = process.env.REACT_APP_API_URL + "/api/topics";
         fetch(url, {
@@ -19,7 +19,7 @@ function Topics() {
         })
             .then(response => response.json())
             .then(data => {
-                topics.push(...data);
+                setTopics(data);
             })
             .catch(error => {
                 console.error(error);
