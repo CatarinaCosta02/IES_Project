@@ -1,6 +1,7 @@
 import styles from "../styles/gallery.module.scss"
 import RedditCard from "./redditCard";
 import HnCard from "./hnCard";
+import NYTCard from "./nytCard";
 
 
 function Gallery({ data }) {
