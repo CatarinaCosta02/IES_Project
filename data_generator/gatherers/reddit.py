@@ -41,7 +41,7 @@ class RedditGatherer:
         "italy": "Italy",
         "poland": "Poland",
         "french": "France",
-        "england": "England",
+        "england": "United Kingdom",
         "spain": "Spain",
         "brasil": "Brasil",
         "china": "China",

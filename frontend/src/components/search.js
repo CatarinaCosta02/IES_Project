@@ -70,7 +70,7 @@ function SearchModal({ closeModal }) {
                         </div>
                     </div>
                 </form>
-
+                
                 <div className={styles.results}>
                     {results && <Gallery data={results} />}
                 </div>
