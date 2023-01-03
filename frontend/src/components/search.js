@@ -14,7 +14,7 @@ function SearchModal({ closeModal }) {
     const populateResults = () => {
         let url = process.env.REACT_APP_API_URL + "/api/search";
         let params = new URLSearchParams();
-        params.append("query", query);
+        params.append("title", query);
         if (topic && topic !== "all") {
             params.append("topic", topic);
         }

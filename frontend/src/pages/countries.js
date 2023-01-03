@@ -14,7 +14,7 @@ function Countries() {
     const onCountryChange = (newCountry) => {
         let url = process.env.REACT_APP_API_URL + "/api/search/countries";
         let params = new URLSearchParams();
-        params.append("query", newCountry);
+        params.append("country", newCountry);
 
         fetch(url + "?" + params.toString(), {
             method: "GET"

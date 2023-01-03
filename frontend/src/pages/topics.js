@@ -31,7 +31,7 @@ function Topics() {
     const onTopicChange = (newTopic) => {
         let url = process.env.REACT_APP_API_URL + "/api/search/topics";
         let params = new URLSearchParams();
-        params.append("query", newTopic);
+        params.append("topic", newTopic);
 
         fetch(url + "?" + params.toString(), {
             method: "GET"
