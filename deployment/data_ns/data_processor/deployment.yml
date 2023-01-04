@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: data-generator # Name of the deployment
+  namespace: data # Name of the namespace
+  labels:
+    app: data-generator # Name of your application
+spec:
+  selector:
+    matchLabels:
+      app: data-generator # Name of your application
+  replicas: 1 # Number of replicas
+  template:
+    metadata:
+      labels:
+        app: data-generator # Name of your application
+    spec:
+      containers:
+      - name: data-generator
+        image: 10.108.89.79:5000/data-generator:1.0
+        imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        env:
+        - name: RABBITMQ_HOST
+          value: rabbitmq.services.svc.cluster.local
+        - name: REDIS_HOST
+          value: redis.services.svc.cluster.local

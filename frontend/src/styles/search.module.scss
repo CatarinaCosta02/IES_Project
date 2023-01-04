@@ -1,0 +1,106 @@
+.backdrop {
+  background-color: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 100000;
+}
+
+.modal {
+  background-color: #fff;
+
+  border-radius: 5px;
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
+
+  position: relative;
+
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+  z-index: 100;
+
+  min-width: 10vw;
+  max-width: 80vw;
+
+  height: 80vh;
+
+  padding: 2rem;
+
+  overflow-y: scroll;
+
+  h3 {
+    margin: 0;
+    padding: 0;
+  }
+
+  .close {
+    position: absolute;
+
+    top: 1rem;
+    right: 1rem;
+
+    margin: 0;
+    padding: 0;
+
+    cursor: pointer;
+  }
+
+  .normal {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+
+    .input {
+      background-color: transparent;
+      border: none;
+      border-bottom: 1px solid #000;
+      width: 30%;
+    }
+
+    .submit {
+      background-color: #538A96;
+      color: white;
+      padding: 0.5rem 1rem;
+      border: none;
+      cursor: pointer;
+    }
+
+    .advOpt {
+      background-color: #538A96;
+      color: white;
+      padding: 0.5rem 1rem;
+      border: none;
+      cursor: pointer;
+      border-radius: 0 15px 15px 0;
+    }
+  }
+}
+
+.advanced {
+  margin-top: 20px;
+  width: 100%;
+  overflow: hidden;
+  height: 0;
+  
+  .input {
+    width: 100%;
+    display: flex;
+
+    label {
+      display: block;
+      width: 150px;
+    }
+
+    select {
+      display: block;
+      width: 200px;
+    }
+  }
+
+  &.open {
+    height: 100%;
+  }
+}

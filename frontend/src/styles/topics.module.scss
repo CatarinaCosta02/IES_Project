@@ -1,0 +1,82 @@
+.header {
+  background: #D9D9D9;
+  height: 50vh;
+  margin: 0;
+  display: flex;
+  position: relative;
+
+  .mainBody {
+    flex-grow: 1;
+  }
+
+  .buttonList {
+    overflow-y: scroll;
+    max-height: available;
+    position: absolute;
+    padding: 0 20px;
+
+    bottom: 0;
+    top: 0;
+    right: 0;
+
+    button {
+      display: block;
+      background-color: transparent;
+      border: none;
+
+      padding-bottom: 8px;
+
+      text-align: left;
+
+      padding-left: 30px;
+      cursor: pointer;
+
+      transition: padding-left 0.2s ease-in-out;
+    }
+
+    button:hover {
+      font-weight: bold;
+      padding-left: 15px;
+    }
+  }
+
+  h1 {
+    color: #000;
+    margin: 0;
+    padding: 100px 0 30px 80px;
+    font-weight: bold;
+  }
+
+  .images {
+    display: flex;
+    justify-content: space-around;
+    width: 300px;
+    margin-left: 80px;
+  }
+}
+
+.main {
+  margin: 50px 40px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 20vw calc(60vw - 100px) 20vw;
+  grid-gap: 10px;
+  grid-template-areas: "hottest gallery nav";
+}
+
+@media screen and (max-width: 1100px) {
+  .main {
+    grid-template-columns:
+            45vw 45vw
+            1fr;
+    grid-template-areas:
+        "hottest nav"
+        "gallery gallery";
+  }
+}
+
+@media screen and (max-height: 500px) {
+  .header {
+    height: 100vh;
+  }
+}
