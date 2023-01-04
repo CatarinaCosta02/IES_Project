@@ -2,11 +2,12 @@ package com.whatsnew.api.Service;
 
 import com.whatsnew.api.mysql.User;
 import com.whatsnew.api.mysql.UserRepository;
+import jpaoletti.jpm.security.core.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceImpl {
+public class UserServiceImpl  implements UserService{
     private UserRepository userRepository;
     @Autowired
     public UserServiceImpl(UserRepository userRepository){
@@ -20,7 +21,7 @@ public class UserServiceImpl {
     public User getUserByNameAndPassword(String name, String password) throws UserNotFoundException {
         User user = userRepository.findByUserNameAndPassword(name, password);
         if(user == null){
-            throw new UserNotFoundException("Invalid id and password");
+            throw new UserNotFoundException();
         }
         return user;
     }

@@ -3,6 +3,7 @@ package com.whatsnew.api.Controller;
 import com.whatsnew.api.JWT.JwtGeneratorInterface;
 import com.whatsnew.api.Service.UserService;
 import com.whatsnew.api.mysql.User;
+import jpaoletti.jpm.security.core.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,11 +38,11 @@ public class UserController {
     public ResponseEntity<?> loginUser(@RequestBody User user) {
         try {
             if (user.getUserName() == null || user.getPassword() == null) {
-                throw new UserNotFoundException("UserName or Password is Empty");
+                throw new UserNotFoundException();
             }
             User userData = userService.getUserByNameAndPassword(user.getUserName(), user.getPassword());
             if (userData == null) {
-                throw new UserNotFoundException("UserName or Password is Invalid");
+                throw new UserNotFoundException();
             }
             return new ResponseEntity<>(jwtGenerator.generateToken(user), HttpStatus.OK);
         } catch (UserNotFoundException e) {
