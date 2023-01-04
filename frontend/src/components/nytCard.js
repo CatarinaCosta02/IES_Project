@@ -7,7 +7,7 @@ function NYTCard({ title, url, topic, desc }) {
     return (
         <Link to={url} className={styles.card}>
             <div className={styles.banner}>
-                <img src={reddit} alt="NewYorkTimes" />
+                <h1>NYT</h1>
             </div>
             <div className={styles.content}>
                 <h3>{title}</h3>

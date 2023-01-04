@@ -7,7 +7,7 @@ function HnCard({ title, url, topic, desc }) {
     return (
         <Link to={url} className={styles.card}>
             <div className={styles.banner}>
-                <img src={reddit} alt="HackerNews" />
+                <h1>Hn</h1>
             </div>
             <div className={styles.content}>
                 <h3>{title}</h3>
