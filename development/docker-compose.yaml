@@ -92,7 +92,7 @@ services:
   api:
     build: ../API/api
     environment:
-      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_HOST=192.168.160.232
     depends_on:
       rabbitmq:
         condition: service_healthy

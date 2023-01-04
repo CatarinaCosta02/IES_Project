@@ -200,7 +200,7 @@ public class Consumer {
             case "GET_ALL_NEWS" -> {
                 SearchResponse<EKNews> search = client.search(s -> s
                                 .index("news")
-                                .size(10000),
+                                .size(100),
                         EKNews.class);
 
                 List<EKNews> hits = search.hits().hits().stream().map(Hit::source).toList();
