@@ -15,7 +15,7 @@ function App() {
         })
             .then(response => response.json())
             .then(data => {
-                setNews(data.splice(0, 5));
+                setNews(data);
             })
             .catch(error => {
                 console.error(error);
