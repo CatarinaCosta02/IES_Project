@@ -2,7 +2,7 @@
 
 # What's New?
 
-What's New? - A website that compiles and agregates news from diferent sources like Reddit or Hacker News around the world. It is focused in every single user that wants to be well-informed about certain topics like (sports, beauty, games, etc).
+What's New? - A website that compiles and aggregates news from different sources like Reddit or Hacker News around the world. It is focused in every single user that wants to be well-informed about certain topics like (sports, beauty, games, etc).
 
 # Project Team:
 
