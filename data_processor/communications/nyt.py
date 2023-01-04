@@ -21,8 +21,9 @@ class NewYorkTimesProtocol:
                 "payload": [],
                 "success": False
             }).encode("utf-8")
-            self.channel.basic_publish(exchange='finished_data', routing_key='reddit', body=byte_data)
+            self.channel.basic_publish(exchange='finished_data', routing_key='nyt', body=byte_data)
             return
+
 
         useful_data = data["payload"]["results"]
         treated_data = []
@@ -39,6 +40,8 @@ class NewYorkTimesProtocol:
                     "author": item["byline"],
                     "permalink": item["url"],
                     "summary": item["abstract"],
+                    "topic": data["payload"].get("topic", None),
+                    "country": data["payload"].get("country", None),
                     "created": datetime.datetime.fromisoformat(item["created_date"]).timestamp(),
                     "sentiment": sentiment,
                     "source": source,

@@ -1,3 +1,4 @@
+import functools
 import os
 import time
 
@@ -7,7 +8,7 @@ import requests
 
 
 class RedditGatherer:
-    SUBREDDITS_TO_SCAN = [
+    COUNTRIES_TO_SCAN = [
         "portugal",
         "usanews",
         "italy",
@@ -23,6 +24,8 @@ class RedditGatherer:
         "newzealand",
         "germany",
         "canada",
+    ]
+    TOPICS_TO_SCAN = [
         "technology",
         "movies",
         "sports",
@@ -137,7 +140,7 @@ class RedditGatherer:
 
         return data
 
-    def top_stories_by_subreddit(self, subreddit):
+    def top_stories_by_subreddit(self, _type, subreddit):
         payload = {
             "t": "all",
             "limit": 4 * self.THRESHOLD
@@ -148,6 +151,8 @@ class RedditGatherer:
 
         data["data"]["children"] = list(filter(lambda i: i is not None and not self.in_cache(i["data"]), data["data"]["children"]))
         data["__subreddit"] = subreddit
+        data[_type] = subreddit
+
         it = 0
         while len(data["data"]["children"]) < self.THRESHOLD and it < 5:
             payload["after"] = data["data"]["after"]
@@ -180,7 +185,8 @@ class RedditGatherer:
 
     def gather_all(self):
         data = []
-        with pathos.multiprocessing.ProcessingPool(nodes=len(self.SUBREDDITS_TO_SCAN) // 2 + 1) as pool:
+        with pathos.multiprocessing.ProcessingPool(nodes=(len(self.TOPICS_TO_SCAN) + len(self.COUNTRIES_TO_SCAN)) // 2 + 1) as pool:
             data += map(lambda res: ("top_stories", res), pool.map(self.top_stories, [None]))
-            data += map(lambda res: ("top_by_subreddit", res), pool.map(self.top_stories_by_subreddit, self.SUBREDDITS_TO_SCAN))
+            data += map(lambda res: ("top_by_subreddit", res), pool.map(functools.partial(self.top_stories_by_subreddit, "topic"), self.TOPICS_TO_SCAN))
+            data += map(lambda res: ("top_by_subreddit", res), pool.map(functools.partial(self.top_stories_by_subreddit, "country"), self.COUNTRIES_TO_SCAN))
         return data

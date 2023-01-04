@@ -19,6 +19,9 @@ public class EKNews {
     private String title;
 
     @Field(type = FieldType.Text)
+    private String _class;
+
+    @Field(type = FieldType.Text)
     private String author;
 
     @Field(type = FieldType.Integer)
@@ -34,8 +37,17 @@ public class EKNews {
     private int created;
 
     @Field(type = FieldType.Text)
+    private String topic = null;
+
+    @Field(type = FieldType.Text)
+    private String country = null;
+
+    @Field(type = FieldType.Text)
     private String summary = null;
 
     @Field(type = FieldType.Text)
     private String source = null;
+
+    @Field(type = FieldType.Float)
+    private Float sentiment = null;
 }
