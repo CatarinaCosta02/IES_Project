@@ -1,6 +1,6 @@
 import map from '../data/topology.json';
 import {GeoJSON, MapContainer} from "react-leaflet";
-import {createRef, useState} from "react";
+import {createRef, useEffect, useState} from "react";
 import styles from '../styles/choropleth.module.scss';
 
 
@@ -8,14 +8,20 @@ function ChoroplethMap({ onChange }) {
     const [country, setCountry] = useState(null);
     const [mapKey, setMapKey] = useState(0);
 
-    const usefullCountries = [
-        "Canada",
-        "Poland",
-        "United States of America",
-        "Portugal",
-        "Germany",
-        "Spain"
-    ];
+    const [usefulCountries, setUsefulCountries] = useState([]);
+    useEffect(() => {
+        const url = process.env.REACT_APP_API_URL + "/api/countries";
+        fetch(url, {
+            method: "GET"
+        })
+        .then(response => response.json())
+        .then(data => {
+            setUsefulCountries(data);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    });
 
     let mapRef = createRef();
     return (
@@ -79,7 +85,7 @@ function ChoroplethMap({ onChange }) {
                 <h3>Countries</h3>
 
                 <div className={styles.buttonLst}>
-                    {usefullCountries.map(c =>
+                    {usefulCountries.map(c =>
                         <button
                             key={c}
                             value={c}
