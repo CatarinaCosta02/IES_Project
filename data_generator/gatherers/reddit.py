@@ -35,6 +35,23 @@ class RedditGatherer:
         "business",
         "fashion"
     ]
+    COUNTRIES_TO_FULLNAME = {
+        "portugal": "Portugal",
+        "usanews": "United States of America",
+        "italy": "Italy",
+        "poland": "Poland",
+        "french": "France",
+        "england": "United Kingdom",
+        "spain": "Spain",
+        "brasil": "Brasil",
+        "china": "China",
+        "austria": "Austria",
+        "argentina": "Argentina",
+        "australia": "Australia",
+        "newzealand": "New Zealand",
+        "germany": "Germany",
+        "canada": "Canada"
+    }
 
     def __init__(self, config):
         self.password = config.get("password")
@@ -151,7 +168,8 @@ class RedditGatherer:
 
         data["data"]["children"] = list(filter(lambda i: i is not None and not self.in_cache(i["data"]), data["data"]["children"]))
         data["__subreddit"] = subreddit
-        data[_type] = subreddit
+        sub = self.COUNTRIES_TO_FULLNAME.get(subreddit, subreddit)
+        data[_type] = sub
 
         it = 0
         while len(data["data"]["children"]) < self.THRESHOLD and it < 5:
