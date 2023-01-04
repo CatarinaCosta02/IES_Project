@@ -24,7 +24,7 @@ function HottestNews() {
             <h3>Hottest News</h3>
             <ul>
                 {news.map((item, index) => (
-                    <li key={index}>item.title</li>
+                    <li key={index}><a href={item.permalink}>{item.title}</a></li>
                 ))}
             </ul>
         </div>
