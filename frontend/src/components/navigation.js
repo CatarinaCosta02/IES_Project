@@ -12,8 +12,6 @@ function Navigation({ active }) {
             <div className={styles.card}>
                 <h3>Navigation</h3>
                 <ul>
-                    <li className={active === "Sign up" ? styles.active : ""}><NavLink to="/signup">Sign up</NavLink></li>
-                    <li className={active === "Sign in" ? styles.active : ""}><NavLink to="/signin">Sign in</NavLink></li>
                     <li className={active === "Countries" ? styles.active : ""}><NavLink to="/countries">Countries</NavLink></li>
                     <li className={active === "Topics" ? styles.active : ""}><NavLink to="/topics">Topics</NavLink></li>
                 </ul>
